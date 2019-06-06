@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sto.mapper.one.BaseOrganizeArea1Mapper" >
+  <resultMap id="BaseResultMap" type="com.sto.entity.BaseOrganizeArea" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="business_district" property="businessDistrict" jdbcType="VARCHAR" />
+    <result column="place_name" property="placeName" jdbcType="VARCHAR" />
+    <result column="road_name" property="roadName" jdbcType="VARCHAR" />
+    <result column="odd_or_even" property="oddOrEven" jdbcType="INTEGER" />
+    <result column="min_road" property="minRoad" jdbcType="INTEGER" />
+    <result column="max_road" property="maxRoad" jdbcType="INTEGER" />
+    <result column="company_code" property="companyCode" jdbcType="VARCHAR" />
+    <result column="user_code" property="userCode" jdbcType="VARCHAR" />
+    <result column="create_on" property="createOn" jdbcType="DATE" />
+    <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="modified_on" property="modifiedOn" jdbcType="DATE" />
+    <result column="modified_user_id" property="modifiedUserId" jdbcType="VARCHAR" />
+    <result column="modified_by" property="modifiedBy" jdbcType="VARCHAR" />
+    <result column="enabled" property="enabled" jdbcType="INTEGER" />
+    <result column="deletion_state_code" property="deletionStateCode" jdbcType="INTEGER" />
+    <result column="audit_status" property="auditStatus" jdbcType="VARCHAR" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="district" property="district" jdbcType="VARCHAR" />
+    <result column="sort_code" property="sortCode" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="RoadResultMap" type="java.util.HashMap">
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="road_name" property="roadName" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, business_district, place_name, road_name, odd_or_even, min_road, max_road, company_code, 
+    user_code, create_on, create_user_id, create_by, modified_on, modified_user_id, modified_by, 
+    enabled, deletion_state_code, audit_status, company_name, province, city, district, 
+    sort_code
+  </sql>
+
+  <sql id="Base_Where_List">
+    <if test="businessDistrict != null  and businessDistrict != ''">
+      and business_district = #{businessDistrict}
+    </if>
+    <if test="companyCode != null and companyCode != ''">
+      and company_code = #{companyCode}
+    </if>
+  </sql>
+
+  <select id="getListByPage" resultMap="BaseResultMap" parameterType="com.sto.param.AreaParam">
+    select
+    <include refid="Base_Column_List" />
+    from base_organize_area
+    where 1=1
+    <include refid="Base_Where_List" />
+    order by id desc
+    limit #{beginLine} , #{pageSize}
+  </select>
+  <select id="getCount" resultType="Integer" parameterType="com.sto.param.AreaParam">
+    select
+    count(1)
+    from base_organize_area
+    where 1=1
+    <include refid="Base_Where_List" />
+  </select>
+
+  <select id="getAll" resultMap="BaseResultMap"  >
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM base_organize_area
+  </select>
+
+  <select id="getRoadByProCity" resultMap="RoadResultMap"  >
+    SELECT
+    id,road_name
+    FROM base_organize_area
+    WHERE
+    province = #{pro, jdbcType=VARCHAR}
+    AND city=#{city, jdbcType=VARCHAR}
+  </select>
+
+
+ <!-- <select id="getCompanyCodeById" resultMap="java.lang.String" parameterType="java.lang.String" >
+    select 
+    company_code
+    from base_organize_area
+    where id = #{id,jdbcType=VARCHAR}
+  </select>-->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from base_organize_area
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+<select id="getAreaListBycode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from base_organize_area
+    where deletion_state_code = 0
+    and enabled = 1
+    and business_district = #{businessDistrict,jdbcType=VARCHAR}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from base_organize_area
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.sto.entity.BaseOrganizeArea" >
+    insert into base_organize_area (id, business_district, place_name, 
+      road_name, odd_or_even, min_road, 
+      max_road, company_code, user_code, 
+      create_on, create_user_id, create_by, 
+      modified_on, modified_user_id, modified_by, 
+      enabled, deletion_state_code, audit_status, 
+      company_name, province, city, 
+      district, sort_code)
+    values (#{id,jdbcType=VARCHAR}, #{businessDistrict,jdbcType=VARCHAR}, #{placeName,jdbcType=VARCHAR}, 
+      #{roadName,jdbcType=VARCHAR}, #{oddOrEven,jdbcType=INTEGER}, #{minRoad,jdbcType=INTEGER}, 
+      #{maxRoad,jdbcType=INTEGER}, #{companyCode,jdbcType=VARCHAR}, #{userCode,jdbcType=VARCHAR}, 
+      #{createOn,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR},
+      #{modifiedOn,jdbcType=TIMESTAMP}, #{modifiedUserId,jdbcType=VARCHAR}, #{modifiedBy,jdbcType=VARCHAR},
+      #{enabled,jdbcType=INTEGER}, #{deletionStateCode,jdbcType=INTEGER}, #{auditStatus,jdbcType=VARCHAR}, 
+      #{companyName,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{district,jdbcType=VARCHAR}, #{sortCode,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sto.entity.BaseOrganizeArea" >
+    insert into base_organize_area
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="businessDistrict != null" >
+        business_district,
+      </if>
+      <if test="placeName != null" >
+        place_name,
+      </if>
+      <if test="roadName != null" >
+        road_name,
+      </if>
+      <if test="oddOrEven != null" >
+        odd_or_even,
+      </if>
+      <if test="minRoad != null" >
+        min_road,
+      </if>
+      <if test="maxRoad != null" >
+        max_road,
+      </if>
+      <if test="companyCode != null" >
+        company_code,
+      </if>
+      <if test="userCode != null" >
+        user_code,
+      </if>
+      <if test="createOn != null" >
+        create_on,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="modifiedOn != null" >
+        modified_on,
+      </if>
+      <if test="modifiedUserId != null" >
+        modified_user_id,
+      </if>
+      <if test="modifiedBy != null" >
+        modified_by,
+      </if>
+      <if test="enabled != null" >
+        enabled,
+      </if>
+      <if test="deletionStateCode != null" >
+        deletion_state_code,
+      </if>
+      <if test="auditStatus != null" >
+        audit_status,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="district != null" >
+        district,
+      </if>
+      <if test="sortCode != null" >
+        sort_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="businessDistrict != null" >
+        #{businessDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="placeName != null" >
+        #{placeName,jdbcType=VARCHAR},
+      </if>
+      <if test="roadName != null" >
+        #{roadName,jdbcType=VARCHAR},
+      </if>
+      <if test="oddOrEven != null" >
+        #{oddOrEven,jdbcType=INTEGER},
+      </if>
+      <if test="minRoad != null" >
+        #{minRoad,jdbcType=INTEGER},
+      </if>
+      <if test="maxRoad != null" >
+        #{maxRoad,jdbcType=INTEGER},
+      </if>
+      <if test="companyCode != null" >
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null" >
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createOn != null" >
+        #{createOn,jdbcType=DATE},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedOn != null" >
+        #{modifiedOn,jdbcType=DATE},
+      </if>
+      <if test="modifiedUserId != null" >
+        #{modifiedUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedBy != null" >
+        #{modifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="deletionStateCode != null" >
+        #{deletionStateCode,jdbcType=INTEGER},
+      </if>
+      <if test="auditStatus != null" >
+        #{auditStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="sortCode != null" >
+        #{sortCode,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.sto.entity.BaseOrganizeArea" >
+    update base_organize_area
+    set business_district = #{businessDistrict,jdbcType=VARCHAR},
+      place_name = #{placeName,jdbcType=VARCHAR},
+      road_name = #{roadName,jdbcType=VARCHAR},
+      odd_or_even = #{oddOrEven,jdbcType=INTEGER},
+      min_road = #{minRoad,jdbcType=INTEGER},
+      max_road = #{maxRoad,jdbcType=INTEGER},
+      company_code = #{companyCode,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      create_on = #{createOn,jdbcType=DATE},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      modified_on = #{modifiedOn,jdbcType=DATE},
+      modified_user_id = #{modifiedUserId,jdbcType=VARCHAR},
+      modified_by = #{modifiedBy,jdbcType=VARCHAR},
+      enabled = #{enabled,jdbcType=INTEGER},
+      deletion_state_code = #{deletionStateCode,jdbcType=INTEGER},
+      audit_status = #{auditStatus,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      district = #{district,jdbcType=VARCHAR},
+      sort_code = #{sortCode,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

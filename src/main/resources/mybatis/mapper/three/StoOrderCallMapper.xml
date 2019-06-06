@@ -1,0 +1,1717 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sto.mapper.three.StoOrderCallMapper" >
+  <resultMap id="BaseResultMap" type="com.sto.entity.Order" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+    <result column="BILL_CODE" property="billCode" jdbcType="VARCHAR" />
+    <result column="SITE_ID" property="siteId" jdbcType="VARCHAR" />
+    <result column="SITE_CODE" property="siteCode" jdbcType="VARCHAR" />
+    <result column="SITE_NAME" property="siteName" jdbcType="VARCHAR" />
+    <result column="REC_SITE_ID" property="recSiteId" jdbcType="VARCHAR" />
+    <result column="REC_SITE_CODE" property="recSiteCode" jdbcType="VARCHAR" />
+    <result column="REC_SITE_NAME" property="recSiteName" jdbcType="VARCHAR" />
+    <result column="ASSIGN_SITE_ID" property="assignSiteId" jdbcType="VARCHAR" />
+    <result column="ASSIGN_SITE_CODE" property="assignSiteCode" jdbcType="VARCHAR" />
+    <result column="ASSIGN_SITE_NAME" property="assignSiteName" jdbcType="VARCHAR" />
+    <result column="ORDER_SOURCE" property="orderSource" jdbcType="VARCHAR" />
+    <result column="ORDER_SOURCE_CODE" property="orderSourceCode" jdbcType="VARCHAR" />
+    <result column="ORDER_DATE" property="orderDate" jdbcType="DATE" />
+    <result column="ASSIGN_DATE" property="assignDate" jdbcType="DATE" />
+    <result column="REC_DATE" property="recDate" jdbcType="DATE" />
+    <result column="CANCEL_DATE" property="cancelDate" jdbcType="DATE" />
+    <result column="SEND_NAME" property="sendName" jdbcType="VARCHAR" />
+    <result column="SEND_PHONE" property="sendPhone" jdbcType="VARCHAR" />
+    <result column="SEND_POSTCODE" property="sendPostcode" jdbcType="VARCHAR" />
+    <result column="SEND_ADDRESS" property="sendAddress" jdbcType="VARCHAR" />
+    <result column="SEND_PROV_ID" property="sendProvId" jdbcType="VARCHAR" />
+    <result column="SEND_PROV" property="sendProv" jdbcType="VARCHAR" />
+    <result column="SEND_CITY_ID" property="sendCityId" jdbcType="VARCHAR" />
+    <result column="SEND_CITY" property="sendCity" jdbcType="VARCHAR" />
+    <result column="SEND_AREA_ID" property="sendAreaId" jdbcType="VARCHAR" />
+    <result column="SEND_AREA" property="sendArea" jdbcType="VARCHAR" />
+    <result column="SEND_TOWN_ID" property="sendTownId" jdbcType="VARCHAR" />
+    <result column="SEND_TOWN" property="sendTown" jdbcType="VARCHAR" />
+    <result column="REC_POSTCODE" property="recPostcode" jdbcType="VARCHAR" />
+    <result column="REC_ADDRESS" property="recAddress" jdbcType="VARCHAR" />
+    <result column="REC_NAME" property="recName" jdbcType="VARCHAR" />
+    <result column="REC_PHONE" property="recPhone" jdbcType="VARCHAR" />
+    <result column="REC_MOBILE" property="recMobile" jdbcType="VARCHAR" />
+    <result column="REC_PROV_ID" property="recProvId" jdbcType="VARCHAR" />
+    <result column="REC_PROV" property="recProv" jdbcType="VARCHAR" />
+    <result column="REC_CITY_ID" property="recCityId" jdbcType="VARCHAR" />
+    <result column="REC_CITY" property="recCity" jdbcType="VARCHAR" />
+    <result column="REC_AREA_ID" property="recAreaId" jdbcType="VARCHAR" />
+    <result column="REC_AREA" property="recArea" jdbcType="VARCHAR" />
+    <result column="REC_TOWN_ID" property="recTownId" jdbcType="VARCHAR" />
+    <result column="REC_TOWN" property="recTown" jdbcType="VARCHAR" />
+    <result column="REC_MAN_CODE" property="recManCode" jdbcType="VARCHAR" />
+    <result column="REC_MAN" property="recMan" jdbcType="VARCHAR" />
+    <result column="ASSIGN_MAN_CODE" property="assignManCode" jdbcType="VARCHAR" />
+    <result column="ASSIGN_MAN" property="assignMan" jdbcType="VARCHAR" />
+    <result column="PIECES" property="pieces" jdbcType="DECIMAL" />
+    <result column="GOODS_TYPE" property="goodsType" jdbcType="VARCHAR" />
+    <result column="WEIGHT" property="weight" jdbcType="DECIMAL" />
+    <result column="VOLUME_WEIGHT" property="volumeWeight" jdbcType="DECIMAL" />
+    <result column="FAST_PRODUCT_TYPE" property="fastProductType" jdbcType="VARCHAR" />
+    <result column="DATOUBI" property="datoubi" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="DECIMAL" />
+    <result column="CANCEL_CAUSE" property="cancelCause" jdbcType="VARCHAR" />
+    <result column="SOURCE_VERSION" property="sourceVersion" jdbcType="DECIMAL" />
+    <result column="SOURCE_ID" property="sourceId" jdbcType="VARCHAR" />
+    <result column="SOURCE_BIZID" property="sourceBizid" jdbcType="VARCHAR" />
+    <result column="SOURCE_CUSTOMER_CODE" property="sourceCustomerCode" jdbcType="VARCHAR" />
+    <result column="STORE_PRICE" property="storePrice" jdbcType="DECIMAL" />
+    <result column="GOODS_VALUE" property="goodsValue" jdbcType="DECIMAL" />
+    <result column="IS_COD" property="isCod" jdbcType="DECIMAL" />
+    <result column="GOODS_PAYMENT" property="goodsPayment" jdbcType="DECIMAL" />
+    <result column="TO_PAYMENT" property="toPayment" jdbcType="DECIMAL" />
+    <result column="RETURN_BILL_FEE" property="returnBillFee" jdbcType="DECIMAL" />
+    <result column="TRAN_FEE" property="tranFee" jdbcType="DECIMAL" />
+    <result column="OTHER_FEE" property="otherFee" jdbcType="DECIMAL" />
+    <result column="RETURN_BILL_CODE" property="returnBillCode" jdbcType="VARCHAR" />
+    <result column="BL_STORE_PRICE" property="blStorePrice" jdbcType="DECIMAL" />
+    <result column="BL_RETURN_BILL" property="blReturnBill" jdbcType="DECIMAL" />
+    <result column="BL_RETU_BILL_SIGN" property="blRetuBillSign" jdbcType="DECIMAL" />
+    <result column="SIGN_DATE" property="signDate" jdbcType="DATE" />
+    <result column="BL_SIGN" property="blSign" jdbcType="DECIMAL" />
+    <result column="DISP_MAN" property="dispMan" jdbcType="VARCHAR" />
+    <result column="DISP_MAN_CODE" property="dispManCode" jdbcType="VARCHAR" />
+    <result column="BL_BACK" property="blBack" jdbcType="DECIMAL" />
+    <result column="MESSAGE_TYPE" property="messageType" jdbcType="DECIMAL" />
+    <result column="SEND_BL_MESSAGE" property="sendBlMessage" jdbcType="DECIMAL" />
+    <result column="RECEIVE_BL_MESSAGE" property="receiveBlMessage" jdbcType="DECIMAL" />
+    <result column="SEND_SMS_TEMPLATE" property="sendSmsTemplate" jdbcType="VARCHAR" />
+    <result column="RECEIVE_SMS_TEMPLATE" property="receiveSmsTemplate" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="DELETION_STATE_CODE" property="deletionStateCode" jdbcType="DECIMAL" />
+    <result column="CREATE_ON" property="createOn" jdbcType="DATE" />
+    <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="CREATE_IP" property="createIp" jdbcType="VARCHAR" />
+    <result column="MODIFIED_ON" property="modifiedOn" jdbcType="DATE" />
+    <result column="MODIFIED_USER_ID" property="modifiedUserId" jdbcType="VARCHAR" />
+    <result column="MODIFIED_BY" property="modifiedBy" jdbcType="VARCHAR" />
+    <result column="MODIFIED_IP" property="modifiedIp" jdbcType="VARCHAR" />
+    <result column="SYNC_TIME" property="syncTime" jdbcType="DATE" />
+    <result column="FETCH_START_DATE" property="fetchStartDate" jdbcType="DATE" />
+    <result column="FETCH_END_DATE" property="fetchEndDate" jdbcType="DATE" />
+    <result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR" />
+    <result column="PRODUCT_TYPE" property="productType" jdbcType="VARCHAR" />
+    <result column="BAIDU_LATITUDE" property="baiduLatitude" jdbcType="VARCHAR" />
+    <result column="ASSIGN_CENTER_ID" property="assignCenterId" jdbcType="VARCHAR" />
+    <result column="ASSIGN_CENTER_CODE" property="assignCenterCode" jdbcType="VARCHAR" />
+    <result column="ASSIGN_CENTER_NAME" property="assignCenterName" jdbcType="VARCHAR" />
+    <result column="PAY_TYPE" property="payType" jdbcType="VARCHAR" />
+    <result column="CREATE_COMPANY_ID" property="createCompanyId" jdbcType="VARCHAR" />
+    <result column="CREATE_COMPANY" property="createCompany" jdbcType="VARCHAR" />
+    <result column="MODIFIED_COMPANY_ID" property="modifiedCompanyId" jdbcType="VARCHAR" />
+    <result column="MODIFIED_COMPANY" property="modifiedCompany" jdbcType="VARCHAR" />
+    <result column="BOX_CODE" property="boxCode" jdbcType="VARCHAR" />
+    <result column="GAODE_LATITUDE" property="gaodeLatitude" jdbcType="VARCHAR" />
+    <result column="GAODE_LONGITUDE" property="gaodeLongitude" jdbcType="VARCHAR" />
+    <result column="CUSTOMER_MESSAGE" property="customerMessage" jdbcType="VARCHAR" />
+    <result column="OPEN_ID" property="openId" jdbcType="VARCHAR" />
+    <result column="SOURCE_STATUS" property="sourceStatus" jdbcType="DECIMAL" />
+    <result column="ASSIGN_MAN_PHONE" property="assignManPhone" jdbcType="VARCHAR" />
+    <result column="SEND_MOBILE" property="sendMobile" jdbcType="VARCHAR" />
+    <result column="WUTONG_ASSIGN_SITE_ID" property="wutongAssignSiteId" jdbcType="VARCHAR" />
+    <result column="WUTONG_ASSIGN_SITE_CODE" property="wutongAssignSiteCode" jdbcType="VARCHAR" />
+    <result column="WUTONG_ASSIGN_SITE_NAME" property="wutongAssignSiteName" jdbcType="VARCHAR" />
+    <result column="ALLOT_TYPE" property="allotType" jdbcType="VARCHAR" />
+    <result column="PRINT_CODE" property="printCode" jdbcType="VARCHAR" />
+    <result column="SEND_EMAIL" property="sendEmail" jdbcType="VARCHAR" />
+    <result column="REC_EMAIL" property="recEmail" jdbcType="VARCHAR" />
+    <result column="BAIDU_LONGITUDE" property="baiduLongitude" jdbcType="VARCHAR" />
+    <result column="JI_BAO" property="jiBao" jdbcType="VARCHAR" />
+    <result column="JI_BAO_CODE" property="jiBaoCode" jdbcType="VARCHAR" />
+    <result column="ID_CARD" property="idCard" jdbcType="VARCHAR" />
+    <result column="MONTH_CUSTOMER" property="monthCustomer" jdbcType="VARCHAR" />
+    <result column="PARENT_ORDER_ID" property="parentOrderId" jdbcType="VARCHAR" />
+    <result column="PRINT_BILL_IMAGE_ID" property="printBillImageId" jdbcType="VARCHAR" />
+    <result column="PICKUP_IMAGE_ID" property="pickupImageId" jdbcType="VARCHAR" />
+    <result column="GOODS_IMAGE_ID" property="goodsImageId" jdbcType="VARCHAR" />
+    <result column="PAY_STATUS" property="payStatus" jdbcType="VARCHAR" />
+    <result column="TAKE_ORDER_DATE" property="takeOrderDate" jdbcType="DATE" />
+    <result column="TAKE_ORDER_STATUS" property="takeOrderStatus" jdbcType="VARCHAR" />
+    <result column="PICKUP_GOODS_DATE" property="pickupGoodsDate" jdbcType="DATE" />
+    <result column="BIND_BILL_CODE_DATE" property="bindBillCodeDate" jdbcType="DATE" />
+    <result column="SEND_COMPANY_NAME" property="sendCompanyName" jdbcType="VARCHAR" />
+    <result column="REC_COMPANY_NAME" property="recCompanyName" jdbcType="VARCHAR" />
+    <result column="SEND_USER_ADDRESS_ID" property="sendUserAddressId" jdbcType="VARCHAR" />
+    <result column="REC_USER_ADDRESS_ID" property="recUserAddressId" jdbcType="VARCHAR" />
+    <result column="PRINT_COUNT" property="printCount" jdbcType="DECIMAL" />
+    <result column="PICKUP_TYPE" property="pickupType" jdbcType="VARCHAR" />
+    <result column="COMMENT_LEVEL" property="commentLevel" jdbcType="DECIMAL" />
+    <result column="REAL_FEE" property="realFee" jdbcType="DECIMAL" />
+    <result column="SCHEDULE_STATUS" property="scheduleStatus" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+
+  <sql id="Base_Column_List" >
+    ID, ORDER_ID, BILL_CODE, SITE_ID, SITE_CODE, SITE_NAME, REC_SITE_ID, REC_SITE_CODE, 
+    REC_SITE_NAME, ASSIGN_SITE_ID, ASSIGN_SITE_CODE, ASSIGN_SITE_NAME, ORDER_SOURCE, 
+    ORDER_SOURCE_CODE, ORDER_DATE, ASSIGN_DATE, REC_DATE, CANCEL_DATE, SEND_NAME, SEND_PHONE, 
+    SEND_POSTCODE, SEND_ADDRESS, SEND_PROV_ID, SEND_PROV, SEND_CITY_ID, SEND_CITY, SEND_AREA_ID, 
+    SEND_AREA, SEND_TOWN_ID, SEND_TOWN, REC_POSTCODE, REC_ADDRESS, REC_NAME, REC_PHONE, 
+    REC_MOBILE, REC_PROV_ID, REC_PROV, REC_CITY_ID, REC_CITY, REC_AREA_ID, REC_AREA, 
+    REC_TOWN_ID, REC_TOWN, REC_MAN_CODE, REC_MAN, ASSIGN_MAN_CODE, ASSIGN_MAN, PIECES, 
+    GOODS_TYPE, WEIGHT, VOLUME_WEIGHT, FAST_PRODUCT_TYPE, DATOUBI, STATUS, CANCEL_CAUSE, 
+    SOURCE_VERSION, SOURCE_ID, SOURCE_BIZID, SOURCE_CUSTOMER_CODE, STORE_PRICE, GOODS_VALUE, 
+    IS_COD, GOODS_PAYMENT, TO_PAYMENT, RETURN_BILL_FEE, TRAN_FEE, OTHER_FEE, RETURN_BILL_CODE, 
+    BL_STORE_PRICE, BL_RETURN_BILL, BL_RETU_BILL_SIGN, SIGN_DATE, BL_SIGN, DISP_MAN, 
+    DISP_MAN_CODE, BL_BACK, MESSAGE_TYPE, SEND_BL_MESSAGE, RECEIVE_BL_MESSAGE, SEND_SMS_TEMPLATE, 
+    RECEIVE_SMS_TEMPLATE, REMARK, DELETION_STATE_CODE, CREATE_ON, CREATE_USER_ID, CREATE_BY, 
+    CREATE_IP, MODIFIED_ON, MODIFIED_USER_ID, MODIFIED_BY, MODIFIED_IP, SYNC_TIME, FETCH_START_DATE, 
+    FETCH_END_DATE, GOODS_NAME, PRODUCT_TYPE, BAIDU_LATITUDE, ASSIGN_CENTER_ID, ASSIGN_CENTER_CODE, 
+    ASSIGN_CENTER_NAME, PAY_TYPE, CREATE_COMPANY_ID, CREATE_COMPANY, MODIFIED_COMPANY_ID, 
+    MODIFIED_COMPANY, BOX_CODE, GAODE_LATITUDE, GAODE_LONGITUDE, CUSTOMER_MESSAGE, OPEN_ID, 
+    SOURCE_STATUS, ASSIGN_MAN_PHONE, SEND_MOBILE, WUTONG_ASSIGN_SITE_ID, WUTONG_ASSIGN_SITE_CODE, 
+    WUTONG_ASSIGN_SITE_NAME, ALLOT_TYPE, PRINT_CODE, SEND_EMAIL, REC_EMAIL, BAIDU_LONGITUDE, 
+    JI_BAO, JI_BAO_CODE, ID_CARD, MONTH_CUSTOMER, PARENT_ORDER_ID, PRINT_BILL_IMAGE_ID, 
+    PICKUP_IMAGE_ID, GOODS_IMAGE_ID, PAY_STATUS, TAKE_ORDER_DATE, TAKE_ORDER_STATUS, 
+    PICKUP_GOODS_DATE, BIND_BILL_CODE_DATE, SEND_COMPANY_NAME, REC_COMPANY_NAME, SEND_USER_ADDRESS_ID, 
+    REC_USER_ADDRESS_ID, PRINT_COUNT, PICKUP_TYPE, COMMENT_LEVEL, REAL_FEE, SCHEDULE_STATUS
+  </sql>
+
+  <select id="getOrderByOrderId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from STO_ORDER_CALL
+    where ORDER_ID = #{orderId,jdbcType=VARCHAR}
+  </select>
+ <select id="getAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from STO_ORDER_CALL
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from STO_ORDER_CALL
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+<select id="getListByDate" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select
+    <include refid="Base_Column_List" />
+    from STO_ORDER_CALL
+    <where>
+      <if test="beginTime != null and beginTime != ''">
+        ORDER_DATE <![CDATA[>=]]> to_date(#{beginTime},'yyyy-MM-dd HH24:mi:ss')
+      </if>
+      <if test="endTime != null and endTime != ''">
+        AND ORDER_DATE <![CDATA[<]]>to_date(#{endTime},'yyyy-MM-dd HH24:mi:ss')
+      </if>
+    </where>
+  </select>
+
+<select id="getByCity" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from STO_ORDER_CALL
+    where SEND_CITY = #{sendCity,jdbcType=VARCHAR}
+  </select>
+
+<select id="getListByCity" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select
+    <include refid="Base_Column_List" />
+    from STO_ORDER_CALL
+    <where>
+      SEND_CITY = #{sendCity,jdbcType=VARCHAR}
+      <if test="beginTime != null and beginTime != ''">
+        AND ORDER_DATE <![CDATA[>=]]> to_date(#{beginTime},'yyyy-MM-dd HH24:mi:ss')
+      </if>
+      <if test="endTime != null and endTime != ''">
+        AND ORDER_DATE <![CDATA[<]]>to_date(#{endTime},'yyyy-MM-dd HH24:mi:ss')
+      </if>
+    </where>
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from STO_ORDER_CALL
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+
+
+  <insert id="insertSelective" parameterType="com.sto.entity.Order" >
+    insert into STO_ORDER_CALL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="billCode != null" >
+        BILL_CODE,
+      </if>
+      <if test="siteId != null" >
+        SITE_ID,
+      </if>
+      <if test="siteCode != null" >
+        SITE_CODE,
+      </if>
+      <if test="siteName != null" >
+        SITE_NAME,
+      </if>
+      <if test="recSiteId != null" >
+        REC_SITE_ID,
+      </if>
+      <if test="recSiteCode != null" >
+        REC_SITE_CODE,
+      </if>
+      <if test="recSiteName != null" >
+        REC_SITE_NAME,
+      </if>
+      <if test="assignSiteId != null" >
+        ASSIGN_SITE_ID,
+      </if>
+      <if test="assignSiteCode != null" >
+        ASSIGN_SITE_CODE,
+      </if>
+      <if test="assignSiteName != null" >
+        ASSIGN_SITE_NAME,
+      </if>
+      <if test="orderSource != null" >
+        ORDER_SOURCE,
+      </if>
+      <if test="orderSourceCode != null" >
+        ORDER_SOURCE_CODE,
+      </if>
+      <if test="orderDate != null" >
+        ORDER_DATE,
+      </if>
+      <if test="assignDate != null" >
+        ASSIGN_DATE,
+      </if>
+      <if test="recDate != null" >
+        REC_DATE,
+      </if>
+      <if test="cancelDate != null" >
+        CANCEL_DATE,
+      </if>
+      <if test="sendName != null" >
+        SEND_NAME,
+      </if>
+      <if test="sendPhone != null" >
+        SEND_PHONE,
+      </if>
+      <if test="sendPostcode != null" >
+        SEND_POSTCODE,
+      </if>
+      <if test="sendAddress != null" >
+        SEND_ADDRESS,
+      </if>
+      <if test="sendProvId != null" >
+        SEND_PROV_ID,
+      </if>
+      <if test="sendProv != null" >
+        SEND_PROV,
+      </if>
+      <if test="sendCityId != null" >
+        SEND_CITY_ID,
+      </if>
+      <if test="sendCity != null" >
+        SEND_CITY,
+      </if>
+      <if test="sendAreaId != null" >
+        SEND_AREA_ID,
+      </if>
+      <if test="sendArea != null" >
+        SEND_AREA,
+      </if>
+      <if test="sendTownId != null" >
+        SEND_TOWN_ID,
+      </if>
+      <if test="sendTown != null" >
+        SEND_TOWN,
+      </if>
+      <if test="recPostcode != null" >
+        REC_POSTCODE,
+      </if>
+      <if test="recAddress != null" >
+        REC_ADDRESS,
+      </if>
+      <if test="recName != null" >
+        REC_NAME,
+      </if>
+      <if test="recPhone != null" >
+        REC_PHONE,
+      </if>
+      <if test="recMobile != null" >
+        REC_MOBILE,
+      </if>
+      <if test="recProvId != null" >
+        REC_PROV_ID,
+      </if>
+      <if test="recProv != null" >
+        REC_PROV,
+      </if>
+      <if test="recCityId != null" >
+        REC_CITY_ID,
+      </if>
+      <if test="recCity != null" >
+        REC_CITY,
+      </if>
+      <if test="recAreaId != null" >
+        REC_AREA_ID,
+      </if>
+      <if test="recArea != null" >
+        REC_AREA,
+      </if>
+      <if test="recTownId != null" >
+        REC_TOWN_ID,
+      </if>
+      <if test="recTown != null" >
+        REC_TOWN,
+      </if>
+      <if test="recManCode != null" >
+        REC_MAN_CODE,
+      </if>
+      <if test="recMan != null" >
+        REC_MAN,
+      </if>
+      <if test="assignManCode != null" >
+        ASSIGN_MAN_CODE,
+      </if>
+      <if test="assignMan != null" >
+        ASSIGN_MAN,
+      </if>
+      <if test="pieces != null" >
+        PIECES,
+      </if>
+      <if test="goodsType != null" >
+        GOODS_TYPE,
+      </if>
+      <if test="weight != null" >
+        WEIGHT,
+      </if>
+      <if test="volumeWeight != null" >
+        VOLUME_WEIGHT,
+      </if>
+      <if test="fastProductType != null" >
+        FAST_PRODUCT_TYPE,
+      </if>
+      <if test="datoubi != null" >
+        DATOUBI,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="cancelCause != null" >
+        CANCEL_CAUSE,
+      </if>
+      <if test="sourceVersion != null" >
+        SOURCE_VERSION,
+      </if>
+      <if test="sourceId != null" >
+        SOURCE_ID,
+      </if>
+      <if test="sourceBizid != null" >
+        SOURCE_BIZID,
+      </if>
+      <if test="sourceCustomerCode != null" >
+        SOURCE_CUSTOMER_CODE,
+      </if>
+      <if test="storePrice != null" >
+        STORE_PRICE,
+      </if>
+      <if test="goodsValue != null" >
+        GOODS_VALUE,
+      </if>
+      <if test="isCod != null" >
+        IS_COD,
+      </if>
+      <if test="goodsPayment != null" >
+        GOODS_PAYMENT,
+      </if>
+      <if test="toPayment != null" >
+        TO_PAYMENT,
+      </if>
+      <if test="returnBillFee != null" >
+        RETURN_BILL_FEE,
+      </if>
+      <if test="tranFee != null" >
+        TRAN_FEE,
+      </if>
+      <if test="otherFee != null" >
+        OTHER_FEE,
+      </if>
+      <if test="returnBillCode != null" >
+        RETURN_BILL_CODE,
+      </if>
+      <if test="blStorePrice != null" >
+        BL_STORE_PRICE,
+      </if>
+      <if test="blReturnBill != null" >
+        BL_RETURN_BILL,
+      </if>
+      <if test="blRetuBillSign != null" >
+        BL_RETU_BILL_SIGN,
+      </if>
+      <if test="signDate != null" >
+        SIGN_DATE,
+      </if>
+      <if test="blSign != null" >
+        BL_SIGN,
+      </if>
+      <if test="dispMan != null" >
+        DISP_MAN,
+      </if>
+      <if test="dispManCode != null" >
+        DISP_MAN_CODE,
+      </if>
+      <if test="blBack != null" >
+        BL_BACK,
+      </if>
+      <if test="messageType != null" >
+        MESSAGE_TYPE,
+      </if>
+      <if test="sendBlMessage != null" >
+        SEND_BL_MESSAGE,
+      </if>
+      <if test="receiveBlMessage != null" >
+        RECEIVE_BL_MESSAGE,
+      </if>
+      <if test="sendSmsTemplate != null" >
+        SEND_SMS_TEMPLATE,
+      </if>
+      <if test="receiveSmsTemplate != null" >
+        RECEIVE_SMS_TEMPLATE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="deletionStateCode != null" >
+        DELETION_STATE_CODE,
+      </if>
+      <if test="createOn != null" >
+        CREATE_ON,
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="createIp != null" >
+        CREATE_IP,
+      </if>
+      <if test="modifiedOn != null" >
+        MODIFIED_ON,
+      </if>
+      <if test="modifiedUserId != null" >
+        MODIFIED_USER_ID,
+      </if>
+      <if test="modifiedBy != null" >
+        MODIFIED_BY,
+      </if>
+      <if test="modifiedIp != null" >
+        MODIFIED_IP,
+      </if>
+      <if test="syncTime != null" >
+        SYNC_TIME,
+      </if>
+      <if test="fetchStartDate != null" >
+        FETCH_START_DATE,
+      </if>
+      <if test="fetchEndDate != null" >
+        FETCH_END_DATE,
+      </if>
+      <if test="goodsName != null" >
+        GOODS_NAME,
+      </if>
+      <if test="productType != null" >
+        PRODUCT_TYPE,
+      </if>
+      <if test="baiduLatitude != null" >
+        BAIDU_LATITUDE,
+      </if>
+      <if test="assignCenterId != null" >
+        ASSIGN_CENTER_ID,
+      </if>
+      <if test="assignCenterCode != null" >
+        ASSIGN_CENTER_CODE,
+      </if>
+      <if test="assignCenterName != null" >
+        ASSIGN_CENTER_NAME,
+      </if>
+      <if test="payType != null" >
+        PAY_TYPE,
+      </if>
+      <if test="createCompanyId != null" >
+        CREATE_COMPANY_ID,
+      </if>
+      <if test="createCompany != null" >
+        CREATE_COMPANY,
+      </if>
+      <if test="modifiedCompanyId != null" >
+        MODIFIED_COMPANY_ID,
+      </if>
+      <if test="modifiedCompany != null" >
+        MODIFIED_COMPANY,
+      </if>
+      <if test="boxCode != null" >
+        BOX_CODE,
+      </if>
+      <if test="gaodeLatitude != null" >
+        GAODE_LATITUDE,
+      </if>
+      <if test="gaodeLongitude != null" >
+        GAODE_LONGITUDE,
+      </if>
+      <if test="customerMessage != null" >
+        CUSTOMER_MESSAGE,
+      </if>
+      <if test="openId != null" >
+        OPEN_ID,
+      </if>
+      <if test="sourceStatus != null" >
+        SOURCE_STATUS,
+      </if>
+      <if test="assignManPhone != null" >
+        ASSIGN_MAN_PHONE,
+      </if>
+      <if test="sendMobile != null" >
+        SEND_MOBILE,
+      </if>
+      <if test="wutongAssignSiteId != null" >
+        WUTONG_ASSIGN_SITE_ID,
+      </if>
+      <if test="wutongAssignSiteCode != null" >
+        WUTONG_ASSIGN_SITE_CODE,
+      </if>
+      <if test="wutongAssignSiteName != null" >
+        WUTONG_ASSIGN_SITE_NAME,
+      </if>
+      <if test="allotType != null" >
+        ALLOT_TYPE,
+      </if>
+      <if test="printCode != null" >
+        PRINT_CODE,
+      </if>
+      <if test="sendEmail != null" >
+        SEND_EMAIL,
+      </if>
+      <if test="recEmail != null" >
+        REC_EMAIL,
+      </if>
+      <if test="baiduLongitude != null" >
+        BAIDU_LONGITUDE,
+      </if>
+      <if test="jiBao != null" >
+        JI_BAO,
+      </if>
+      <if test="jiBaoCode != null" >
+        JI_BAO_CODE,
+      </if>
+      <if test="idCard != null" >
+        ID_CARD,
+      </if>
+      <if test="monthCustomer != null" >
+        MONTH_CUSTOMER,
+      </if>
+      <if test="parentOrderId != null" >
+        PARENT_ORDER_ID,
+      </if>
+      <if test="printBillImageId != null" >
+        PRINT_BILL_IMAGE_ID,
+      </if>
+      <if test="pickupImageId != null" >
+        PICKUP_IMAGE_ID,
+      </if>
+      <if test="goodsImageId != null" >
+        GOODS_IMAGE_ID,
+      </if>
+      <if test="payStatus != null" >
+        PAY_STATUS,
+      </if>
+      <if test="takeOrderDate != null" >
+        TAKE_ORDER_DATE,
+      </if>
+      <if test="takeOrderStatus != null" >
+        TAKE_ORDER_STATUS,
+      </if>
+      <if test="pickupGoodsDate != null" >
+        PICKUP_GOODS_DATE,
+      </if>
+      <if test="bindBillCodeDate != null" >
+        BIND_BILL_CODE_DATE,
+      </if>
+      <if test="sendCompanyName != null" >
+        SEND_COMPANY_NAME,
+      </if>
+      <if test="recCompanyName != null" >
+        REC_COMPANY_NAME,
+      </if>
+      <if test="sendUserAddressId != null" >
+        SEND_USER_ADDRESS_ID,
+      </if>
+      <if test="recUserAddressId != null" >
+        REC_USER_ADDRESS_ID,
+      </if>
+      <if test="printCount != null" >
+        PRINT_COUNT,
+      </if>
+      <if test="pickupType != null" >
+        PICKUP_TYPE,
+      </if>
+      <if test="commentLevel != null" >
+        COMMENT_LEVEL,
+      </if>
+      <if test="realFee != null" >
+        REAL_FEE,
+      </if>
+      <if test="scheduleStatus != null" >
+        SCHEDULE_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="billCode != null" >
+        #{billCode,jdbcType=VARCHAR},
+      </if>
+      <if test="siteId != null" >
+        #{siteId,jdbcType=VARCHAR},
+      </if>
+      <if test="siteCode != null" >
+        #{siteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="siteName != null" >
+        #{siteName,jdbcType=VARCHAR},
+      </if>
+      <if test="recSiteId != null" >
+        #{recSiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="recSiteCode != null" >
+        #{recSiteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="recSiteName != null" >
+        #{recSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="assignSiteId != null" >
+        #{assignSiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="assignSiteCode != null" >
+        #{assignSiteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="assignSiteName != null" >
+        #{assignSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSource != null" >
+        #{orderSource,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSourceCode != null" >
+        #{orderSourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null" >
+        #{orderDate,jdbcType=DATE},
+      </if>
+      <if test="assignDate != null" >
+        #{assignDate,jdbcType=DATE},
+      </if>
+      <if test="recDate != null" >
+        #{recDate,jdbcType=DATE},
+      </if>
+      <if test="cancelDate != null" >
+        #{cancelDate,jdbcType=DATE},
+      </if>
+      <if test="sendName != null" >
+        #{sendName,jdbcType=VARCHAR},
+      </if>
+      <if test="sendPhone != null" >
+        #{sendPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="sendPostcode != null" >
+        #{sendPostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="sendAddress != null" >
+        #{sendAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sendProvId != null" >
+        #{sendProvId,jdbcType=VARCHAR},
+      </if>
+      <if test="sendProv != null" >
+        #{sendProv,jdbcType=VARCHAR},
+      </if>
+      <if test="sendCityId != null" >
+        #{sendCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="sendCity != null" >
+        #{sendCity,jdbcType=VARCHAR},
+      </if>
+      <if test="sendAreaId != null" >
+        #{sendAreaId,jdbcType=VARCHAR},
+      </if>
+      <if test="sendArea != null" >
+        #{sendArea,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTownId != null" >
+        #{sendTownId,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTown != null" >
+        #{sendTown,jdbcType=VARCHAR},
+      </if>
+      <if test="recPostcode != null" >
+        #{recPostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="recAddress != null" >
+        #{recAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="recName != null" >
+        #{recName,jdbcType=VARCHAR},
+      </if>
+      <if test="recPhone != null" >
+        #{recPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="recMobile != null" >
+        #{recMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="recProvId != null" >
+        #{recProvId,jdbcType=VARCHAR},
+      </if>
+      <if test="recProv != null" >
+        #{recProv,jdbcType=VARCHAR},
+      </if>
+      <if test="recCityId != null" >
+        #{recCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="recCity != null" >
+        #{recCity,jdbcType=VARCHAR},
+      </if>
+      <if test="recAreaId != null" >
+        #{recAreaId,jdbcType=VARCHAR},
+      </if>
+      <if test="recArea != null" >
+        #{recArea,jdbcType=VARCHAR},
+      </if>
+      <if test="recTownId != null" >
+        #{recTownId,jdbcType=VARCHAR},
+      </if>
+      <if test="recTown != null" >
+        #{recTown,jdbcType=VARCHAR},
+      </if>
+      <if test="recManCode != null" >
+        #{recManCode,jdbcType=VARCHAR},
+      </if>
+      <if test="recMan != null" >
+        #{recMan,jdbcType=VARCHAR},
+      </if>
+      <if test="assignManCode != null" >
+        #{assignManCode,jdbcType=VARCHAR},
+      </if>
+      <if test="assignMan != null" >
+        #{assignMan,jdbcType=VARCHAR},
+      </if>
+      <if test="pieces != null" >
+        #{pieces,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsType != null" >
+        #{goodsType,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="volumeWeight != null" >
+        #{volumeWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="fastProductType != null" >
+        #{fastProductType,jdbcType=VARCHAR},
+      </if>
+      <if test="datoubi != null" >
+        #{datoubi,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="cancelCause != null" >
+        #{cancelCause,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceVersion != null" >
+        #{sourceVersion,jdbcType=DECIMAL},
+      </if>
+      <if test="sourceId != null" >
+        #{sourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceBizid != null" >
+        #{sourceBizid,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceCustomerCode != null" >
+        #{sourceCustomerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="storePrice != null" >
+        #{storePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsValue != null" >
+        #{goodsValue,jdbcType=DECIMAL},
+      </if>
+      <if test="isCod != null" >
+        #{isCod,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsPayment != null" >
+        #{goodsPayment,jdbcType=DECIMAL},
+      </if>
+      <if test="toPayment != null" >
+        #{toPayment,jdbcType=DECIMAL},
+      </if>
+      <if test="returnBillFee != null" >
+        #{returnBillFee,jdbcType=DECIMAL},
+      </if>
+      <if test="tranFee != null" >
+        #{tranFee,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFee != null" >
+        #{otherFee,jdbcType=DECIMAL},
+      </if>
+      <if test="returnBillCode != null" >
+        #{returnBillCode,jdbcType=VARCHAR},
+      </if>
+      <if test="blStorePrice != null" >
+        #{blStorePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="blReturnBill != null" >
+        #{blReturnBill,jdbcType=DECIMAL},
+      </if>
+      <if test="blRetuBillSign != null" >
+        #{blRetuBillSign,jdbcType=DECIMAL},
+      </if>
+      <if test="signDate != null" >
+        #{signDate,jdbcType=DATE},
+      </if>
+      <if test="blSign != null" >
+        #{blSign,jdbcType=DECIMAL},
+      </if>
+      <if test="dispMan != null" >
+        #{dispMan,jdbcType=VARCHAR},
+      </if>
+      <if test="dispManCode != null" >
+        #{dispManCode,jdbcType=VARCHAR},
+      </if>
+      <if test="blBack != null" >
+        #{blBack,jdbcType=DECIMAL},
+      </if>
+      <if test="messageType != null" >
+        #{messageType,jdbcType=DECIMAL},
+      </if>
+      <if test="sendBlMessage != null" >
+        #{sendBlMessage,jdbcType=DECIMAL},
+      </if>
+      <if test="receiveBlMessage != null" >
+        #{receiveBlMessage,jdbcType=DECIMAL},
+      </if>
+      <if test="sendSmsTemplate != null" >
+        #{sendSmsTemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveSmsTemplate != null" >
+        #{receiveSmsTemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deletionStateCode != null" >
+        #{deletionStateCode,jdbcType=DECIMAL},
+      </if>
+      <if test="createOn != null" >
+        #{createOn,jdbcType=DATE},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createIp != null" >
+        #{createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedOn != null" >
+        #{modifiedOn,jdbcType=DATE},
+      </if>
+      <if test="modifiedUserId != null" >
+        #{modifiedUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedBy != null" >
+        #{modifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedIp != null" >
+        #{modifiedIp,jdbcType=VARCHAR},
+      </if>
+      <if test="syncTime != null" >
+        #{syncTime,jdbcType=DATE},
+      </if>
+      <if test="fetchStartDate != null" >
+        #{fetchStartDate,jdbcType=DATE},
+      </if>
+      <if test="fetchEndDate != null" >
+        #{fetchEndDate,jdbcType=DATE},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="productType != null" >
+        #{productType,jdbcType=VARCHAR},
+      </if>
+      <if test="baiduLatitude != null" >
+        #{baiduLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="assignCenterId != null" >
+        #{assignCenterId,jdbcType=VARCHAR},
+      </if>
+      <if test="assignCenterCode != null" >
+        #{assignCenterCode,jdbcType=VARCHAR},
+      </if>
+      <if test="assignCenterName != null" >
+        #{assignCenterName,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="createCompanyId != null" >
+        #{createCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="createCompany != null" >
+        #{createCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedCompanyId != null" >
+        #{modifiedCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedCompany != null" >
+        #{modifiedCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="boxCode != null" >
+        #{boxCode,jdbcType=VARCHAR},
+      </if>
+      <if test="gaodeLatitude != null" >
+        #{gaodeLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="gaodeLongitude != null" >
+        #{gaodeLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="customerMessage != null" >
+        #{customerMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceStatus != null" >
+        #{sourceStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="assignManPhone != null" >
+        #{assignManPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="sendMobile != null" >
+        #{sendMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="wutongAssignSiteId != null" >
+        #{wutongAssignSiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="wutongAssignSiteCode != null" >
+        #{wutongAssignSiteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="wutongAssignSiteName != null" >
+        #{wutongAssignSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="allotType != null" >
+        #{allotType,jdbcType=VARCHAR},
+      </if>
+      <if test="printCode != null" >
+        #{printCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sendEmail != null" >
+        #{sendEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="recEmail != null" >
+        #{recEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="baiduLongitude != null" >
+        #{baiduLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="jiBao != null" >
+        #{jiBao,jdbcType=VARCHAR},
+      </if>
+      <if test="jiBaoCode != null" >
+        #{jiBaoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="monthCustomer != null" >
+        #{monthCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="parentOrderId != null" >
+        #{parentOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="printBillImageId != null" >
+        #{printBillImageId,jdbcType=VARCHAR},
+      </if>
+      <if test="pickupImageId != null" >
+        #{pickupImageId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsImageId != null" >
+        #{goodsImageId,jdbcType=VARCHAR},
+      </if>
+      <if test="payStatus != null" >
+        #{payStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="takeOrderDate != null" >
+        #{takeOrderDate,jdbcType=DATE},
+      </if>
+      <if test="takeOrderStatus != null" >
+        #{takeOrderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="pickupGoodsDate != null" >
+        #{pickupGoodsDate,jdbcType=DATE},
+      </if>
+      <if test="bindBillCodeDate != null" >
+        #{bindBillCodeDate,jdbcType=DATE},
+      </if>
+      <if test="sendCompanyName != null" >
+        #{sendCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="recCompanyName != null" >
+        #{recCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="sendUserAddressId != null" >
+        #{sendUserAddressId,jdbcType=VARCHAR},
+      </if>
+      <if test="recUserAddressId != null" >
+        #{recUserAddressId,jdbcType=VARCHAR},
+      </if>
+      <if test="printCount != null" >
+        #{printCount,jdbcType=DECIMAL},
+      </if>
+      <if test="pickupType != null" >
+        #{pickupType,jdbcType=VARCHAR},
+      </if>
+      <if test="commentLevel != null" >
+        #{commentLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="realFee != null" >
+        #{realFee,jdbcType=DECIMAL},
+      </if>
+      <if test="scheduleStatus != null" >
+        #{scheduleStatus,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sto.entity.Order" resultType="java.lang.Integer" >
+    select count(*) from STO_ORDER_CALL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.sto.entity.Order" >
+    update STO_ORDER_CALL
+    <set >
+      <if test="orderId != null" >
+        ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="billCode != null" >
+        BILL_CODE = #{billCode,jdbcType=VARCHAR},
+      </if>
+      <if test="siteId != null" >
+        SITE_ID = #{siteId,jdbcType=VARCHAR},
+      </if>
+      <if test="siteCode != null" >
+        SITE_CODE = #{siteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="siteName != null" >
+        SITE_NAME = #{siteName,jdbcType=VARCHAR},
+      </if>
+      <if test="recSiteId != null" >
+        REC_SITE_ID = #{recSiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="recSiteCode != null" >
+        REC_SITE_CODE = #{recSiteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="recSiteName != null" >
+        REC_SITE_NAME = #{recSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="assignSiteId != null" >
+        ASSIGN_SITE_ID = #{assignSiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="assignSiteCode != null" >
+        ASSIGN_SITE_CODE = #{assignSiteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="assignSiteName != null" >
+        ASSIGN_SITE_NAME = #{assignSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSource != null" >
+        ORDER_SOURCE = #{orderSource,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSourceCode != null" >
+        ORDER_SOURCE_CODE = #{orderSourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDate != null" >
+        ORDER_DATE = #{orderDate,jdbcType=DATE},
+      </if>
+      <if test="assignDate != null" >
+        ASSIGN_DATE = #{assignDate,jdbcType=DATE},
+      </if>
+      <if test="recDate != null" >
+        REC_DATE = #{recDate,jdbcType=DATE},
+      </if>
+      <if test="cancelDate != null" >
+        CANCEL_DATE = #{cancelDate,jdbcType=DATE},
+      </if>
+      <if test="sendName != null" >
+        SEND_NAME = #{sendName,jdbcType=VARCHAR},
+      </if>
+      <if test="sendPhone != null" >
+        SEND_PHONE = #{sendPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="sendPostcode != null" >
+        SEND_POSTCODE = #{sendPostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="sendAddress != null" >
+        SEND_ADDRESS = #{sendAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sendProvId != null" >
+        SEND_PROV_ID = #{sendProvId,jdbcType=VARCHAR},
+      </if>
+      <if test="sendProv != null" >
+        SEND_PROV = #{sendProv,jdbcType=VARCHAR},
+      </if>
+      <if test="sendCityId != null" >
+        SEND_CITY_ID = #{sendCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="sendCity != null" >
+        SEND_CITY = #{sendCity,jdbcType=VARCHAR},
+      </if>
+      <if test="sendAreaId != null" >
+        SEND_AREA_ID = #{sendAreaId,jdbcType=VARCHAR},
+      </if>
+      <if test="sendArea != null" >
+        SEND_AREA = #{sendArea,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTownId != null" >
+        SEND_TOWN_ID = #{sendTownId,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTown != null" >
+        SEND_TOWN = #{sendTown,jdbcType=VARCHAR},
+      </if>
+      <if test="recPostcode != null" >
+        REC_POSTCODE = #{recPostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="recAddress != null" >
+        REC_ADDRESS = #{recAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="recName != null" >
+        REC_NAME = #{recName,jdbcType=VARCHAR},
+      </if>
+      <if test="recPhone != null" >
+        REC_PHONE = #{recPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="recMobile != null" >
+        REC_MOBILE = #{recMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="recProvId != null" >
+        REC_PROV_ID = #{recProvId,jdbcType=VARCHAR},
+      </if>
+      <if test="recProv != null" >
+        REC_PROV = #{recProv,jdbcType=VARCHAR},
+      </if>
+      <if test="recCityId != null" >
+        REC_CITY_ID = #{recCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="recCity != null" >
+        REC_CITY = #{recCity,jdbcType=VARCHAR},
+      </if>
+      <if test="recAreaId != null" >
+        REC_AREA_ID = #{recAreaId,jdbcType=VARCHAR},
+      </if>
+      <if test="recArea != null" >
+        REC_AREA = #{recArea,jdbcType=VARCHAR},
+      </if>
+      <if test="recTownId != null" >
+        REC_TOWN_ID = #{recTownId,jdbcType=VARCHAR},
+      </if>
+      <if test="recTown != null" >
+        REC_TOWN = #{recTown,jdbcType=VARCHAR},
+      </if>
+      <if test="recManCode != null" >
+        REC_MAN_CODE = #{recManCode,jdbcType=VARCHAR},
+      </if>
+      <if test="recMan != null" >
+        REC_MAN = #{recMan,jdbcType=VARCHAR},
+      </if>
+      <if test="assignManCode != null" >
+        ASSIGN_MAN_CODE = #{assignManCode,jdbcType=VARCHAR},
+      </if>
+      <if test="assignMan != null" >
+        ASSIGN_MAN = #{assignMan,jdbcType=VARCHAR},
+      </if>
+      <if test="pieces != null" >
+        PIECES = #{pieces,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsType != null" >
+        GOODS_TYPE = #{goodsType,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        WEIGHT = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="volumeWeight != null" >
+        VOLUME_WEIGHT = #{volumeWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="fastProductType != null" >
+        FAST_PRODUCT_TYPE = #{fastProductType,jdbcType=VARCHAR},
+      </if>
+      <if test="datoubi != null" >
+        DATOUBI = #{datoubi,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="cancelCause != null" >
+        CANCEL_CAUSE = #{cancelCause,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceVersion != null" >
+        SOURCE_VERSION = #{sourceVersion,jdbcType=DECIMAL},
+      </if>
+      <if test="sourceId != null" >
+        SOURCE_ID = #{sourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceBizid != null" >
+        SOURCE_BIZID = #{sourceBizid,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceCustomerCode != null" >
+        SOURCE_CUSTOMER_CODE = #{sourceCustomerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="storePrice != null" >
+        STORE_PRICE = #{storePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsValue != null" >
+        GOODS_VALUE = #{goodsValue,jdbcType=DECIMAL},
+      </if>
+      <if test="isCod != null" >
+        IS_COD = #{isCod,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsPayment != null" >
+        GOODS_PAYMENT = #{goodsPayment,jdbcType=DECIMAL},
+      </if>
+      <if test="toPayment != null" >
+        TO_PAYMENT = #{toPayment,jdbcType=DECIMAL},
+      </if>
+      <if test="returnBillFee != null" >
+        RETURN_BILL_FEE = #{returnBillFee,jdbcType=DECIMAL},
+      </if>
+      <if test="tranFee != null" >
+        TRAN_FEE = #{tranFee,jdbcType=DECIMAL},
+      </if>
+      <if test="otherFee != null" >
+        OTHER_FEE = #{otherFee,jdbcType=DECIMAL},
+      </if>
+      <if test="returnBillCode != null" >
+        RETURN_BILL_CODE = #{returnBillCode,jdbcType=VARCHAR},
+      </if>
+      <if test="blStorePrice != null" >
+        BL_STORE_PRICE = #{blStorePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="blReturnBill != null" >
+        BL_RETURN_BILL = #{blReturnBill,jdbcType=DECIMAL},
+      </if>
+      <if test="blRetuBillSign != null" >
+        BL_RETU_BILL_SIGN = #{blRetuBillSign,jdbcType=DECIMAL},
+      </if>
+      <if test="signDate != null" >
+        SIGN_DATE = #{signDate,jdbcType=DATE},
+      </if>
+      <if test="blSign != null" >
+        BL_SIGN = #{blSign,jdbcType=DECIMAL},
+      </if>
+      <if test="dispMan != null" >
+        DISP_MAN = #{dispMan,jdbcType=VARCHAR},
+      </if>
+      <if test="dispManCode != null" >
+        DISP_MAN_CODE = #{dispManCode,jdbcType=VARCHAR},
+      </if>
+      <if test="blBack != null" >
+        BL_BACK = #{blBack,jdbcType=DECIMAL},
+      </if>
+      <if test="messageType != null" >
+        MESSAGE_TYPE = #{messageType,jdbcType=DECIMAL},
+      </if>
+      <if test="sendBlMessage != null" >
+        SEND_BL_MESSAGE = #{sendBlMessage,jdbcType=DECIMAL},
+      </if>
+      <if test="receiveBlMessage != null" >
+        RECEIVE_BL_MESSAGE = #{receiveBlMessage,jdbcType=DECIMAL},
+      </if>
+      <if test="sendSmsTemplate != null" >
+        SEND_SMS_TEMPLATE = #{sendSmsTemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveSmsTemplate != null" >
+        RECEIVE_SMS_TEMPLATE = #{receiveSmsTemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deletionStateCode != null" >
+        DELETION_STATE_CODE = #{deletionStateCode,jdbcType=DECIMAL},
+      </if>
+      <if test="createOn != null" >
+        CREATE_ON = #{createOn,jdbcType=DATE},
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createIp != null" >
+        CREATE_IP = #{createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedOn != null" >
+        MODIFIED_ON = #{modifiedOn,jdbcType=DATE},
+      </if>
+      <if test="modifiedUserId != null" >
+        MODIFIED_USER_ID = #{modifiedUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedBy != null" >
+        MODIFIED_BY = #{modifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedIp != null" >
+        MODIFIED_IP = #{modifiedIp,jdbcType=VARCHAR},
+      </if>
+      <if test="syncTime != null" >
+        SYNC_TIME = #{syncTime,jdbcType=DATE},
+      </if>
+      <if test="fetchStartDate != null" >
+        FETCH_START_DATE = #{fetchStartDate,jdbcType=DATE},
+      </if>
+      <if test="fetchEndDate != null" >
+        FETCH_END_DATE = #{fetchEndDate,jdbcType=DATE},
+      </if>
+      <if test="goodsName != null" >
+        GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="productType != null" >
+        PRODUCT_TYPE = #{productType,jdbcType=VARCHAR},
+      </if>
+      <if test="baiduLatitude != null" >
+        BAIDU_LATITUDE = #{baiduLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="assignCenterId != null" >
+        ASSIGN_CENTER_ID = #{assignCenterId,jdbcType=VARCHAR},
+      </if>
+      <if test="assignCenterCode != null" >
+        ASSIGN_CENTER_CODE = #{assignCenterCode,jdbcType=VARCHAR},
+      </if>
+      <if test="assignCenterName != null" >
+        ASSIGN_CENTER_NAME = #{assignCenterName,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        PAY_TYPE = #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="createCompanyId != null" >
+        CREATE_COMPANY_ID = #{createCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="createCompany != null" >
+        CREATE_COMPANY = #{createCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedCompanyId != null" >
+        MODIFIED_COMPANY_ID = #{modifiedCompanyId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedCompany != null" >
+        MODIFIED_COMPANY = #{modifiedCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="boxCode != null" >
+        BOX_CODE = #{boxCode,jdbcType=VARCHAR},
+      </if>
+      <if test="gaodeLatitude != null" >
+        GAODE_LATITUDE = #{gaodeLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="gaodeLongitude != null" >
+        GAODE_LONGITUDE = #{gaodeLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="customerMessage != null" >
+        CUSTOMER_MESSAGE = #{customerMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        OPEN_ID = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceStatus != null" >
+        SOURCE_STATUS = #{sourceStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="assignManPhone != null" >
+        ASSIGN_MAN_PHONE = #{assignManPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="sendMobile != null" >
+        SEND_MOBILE = #{sendMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="wutongAssignSiteId != null" >
+        WUTONG_ASSIGN_SITE_ID = #{wutongAssignSiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="wutongAssignSiteCode != null" >
+        WUTONG_ASSIGN_SITE_CODE = #{wutongAssignSiteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="wutongAssignSiteName != null" >
+        WUTONG_ASSIGN_SITE_NAME = #{wutongAssignSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="allotType != null" >
+        ALLOT_TYPE = #{allotType,jdbcType=VARCHAR},
+      </if>
+      <if test="printCode != null" >
+        PRINT_CODE = #{printCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sendEmail != null" >
+        SEND_EMAIL = #{sendEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="recEmail != null" >
+        REC_EMAIL = #{recEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="baiduLongitude != null" >
+        BAIDU_LONGITUDE = #{baiduLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="jiBao != null" >
+        JI_BAO = #{jiBao,jdbcType=VARCHAR},
+      </if>
+      <if test="jiBaoCode != null" >
+        JI_BAO_CODE = #{jiBaoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        ID_CARD = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="monthCustomer != null" >
+        MONTH_CUSTOMER = #{monthCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="parentOrderId != null" >
+        PARENT_ORDER_ID = #{parentOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="printBillImageId != null" >
+        PRINT_BILL_IMAGE_ID = #{printBillImageId,jdbcType=VARCHAR},
+      </if>
+      <if test="pickupImageId != null" >
+        PICKUP_IMAGE_ID = #{pickupImageId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsImageId != null" >
+        GOODS_IMAGE_ID = #{goodsImageId,jdbcType=VARCHAR},
+      </if>
+      <if test="payStatus != null" >
+        PAY_STATUS = #{payStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="takeOrderDate != null" >
+        TAKE_ORDER_DATE = #{takeOrderDate,jdbcType=DATE},
+      </if>
+      <if test="takeOrderStatus != null" >
+        TAKE_ORDER_STATUS = #{takeOrderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="pickupGoodsDate != null" >
+        PICKUP_GOODS_DATE = #{pickupGoodsDate,jdbcType=DATE},
+      </if>
+      <if test="bindBillCodeDate != null" >
+        BIND_BILL_CODE_DATE = #{bindBillCodeDate,jdbcType=DATE},
+      </if>
+      <if test="sendCompanyName != null" >
+        SEND_COMPANY_NAME = #{sendCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="recCompanyName != null" >
+        REC_COMPANY_NAME = #{recCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="sendUserAddressId != null" >
+        SEND_USER_ADDRESS_ID = #{sendUserAddressId,jdbcType=VARCHAR},
+      </if>
+      <if test="recUserAddressId != null" >
+        REC_USER_ADDRESS_ID = #{recUserAddressId,jdbcType=VARCHAR},
+      </if>
+      <if test="printCount != null" >
+        PRINT_COUNT = #{printCount,jdbcType=DECIMAL},
+      </if>
+      <if test="pickupType != null" >
+        PICKUP_TYPE = #{pickupType,jdbcType=VARCHAR},
+      </if>
+      <if test="commentLevel != null" >
+        COMMENT_LEVEL = #{commentLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="realFee != null" >
+        REAL_FEE = #{realFee,jdbcType=DECIMAL},
+      </if>
+      <if test="scheduleStatus != null" >
+        SCHEDULE_STATUS = #{scheduleStatus,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sto.entity.Order" >
+    update STO_ORDER_CALL
+    set ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      BILL_CODE = #{billCode,jdbcType=VARCHAR},
+      SITE_ID = #{siteId,jdbcType=VARCHAR},
+      SITE_CODE = #{siteCode,jdbcType=VARCHAR},
+      SITE_NAME = #{siteName,jdbcType=VARCHAR},
+      REC_SITE_ID = #{recSiteId,jdbcType=VARCHAR},
+      REC_SITE_CODE = #{recSiteCode,jdbcType=VARCHAR},
+      REC_SITE_NAME = #{recSiteName,jdbcType=VARCHAR},
+      ASSIGN_SITE_ID = #{assignSiteId,jdbcType=VARCHAR},
+      ASSIGN_SITE_CODE = #{assignSiteCode,jdbcType=VARCHAR},
+      ASSIGN_SITE_NAME = #{assignSiteName,jdbcType=VARCHAR},
+      ORDER_SOURCE = #{orderSource,jdbcType=VARCHAR},
+      ORDER_SOURCE_CODE = #{orderSourceCode,jdbcType=VARCHAR},
+      ORDER_DATE = #{orderDate,jdbcType=DATE},
+      ASSIGN_DATE = #{assignDate,jdbcType=DATE},
+      REC_DATE = #{recDate,jdbcType=DATE},
+      CANCEL_DATE = #{cancelDate,jdbcType=DATE},
+      SEND_NAME = #{sendName,jdbcType=VARCHAR},
+      SEND_PHONE = #{sendPhone,jdbcType=VARCHAR},
+      SEND_POSTCODE = #{sendPostcode,jdbcType=VARCHAR},
+      SEND_ADDRESS = #{sendAddress,jdbcType=VARCHAR},
+      SEND_PROV_ID = #{sendProvId,jdbcType=VARCHAR},
+      SEND_PROV = #{sendProv,jdbcType=VARCHAR},
+      SEND_CITY_ID = #{sendCityId,jdbcType=VARCHAR},
+      SEND_CITY = #{sendCity,jdbcType=VARCHAR},
+      SEND_AREA_ID = #{sendAreaId,jdbcType=VARCHAR},
+      SEND_AREA = #{sendArea,jdbcType=VARCHAR},
+      SEND_TOWN_ID = #{sendTownId,jdbcType=VARCHAR},
+      SEND_TOWN = #{sendTown,jdbcType=VARCHAR},
+      REC_POSTCODE = #{recPostcode,jdbcType=VARCHAR},
+      REC_ADDRESS = #{recAddress,jdbcType=VARCHAR},
+      REC_NAME = #{recName,jdbcType=VARCHAR},
+      REC_PHONE = #{recPhone,jdbcType=VARCHAR},
+      REC_MOBILE = #{recMobile,jdbcType=VARCHAR},
+      REC_PROV_ID = #{recProvId,jdbcType=VARCHAR},
+      REC_PROV = #{recProv,jdbcType=VARCHAR},
+      REC_CITY_ID = #{recCityId,jdbcType=VARCHAR},
+      REC_CITY = #{recCity,jdbcType=VARCHAR},
+      REC_AREA_ID = #{recAreaId,jdbcType=VARCHAR},
+      REC_AREA = #{recArea,jdbcType=VARCHAR},
+      REC_TOWN_ID = #{recTownId,jdbcType=VARCHAR},
+      REC_TOWN = #{recTown,jdbcType=VARCHAR},
+      REC_MAN_CODE = #{recManCode,jdbcType=VARCHAR},
+      REC_MAN = #{recMan,jdbcType=VARCHAR},
+      ASSIGN_MAN_CODE = #{assignManCode,jdbcType=VARCHAR},
+      ASSIGN_MAN = #{assignMan,jdbcType=VARCHAR},
+      PIECES = #{pieces,jdbcType=DECIMAL},
+      GOODS_TYPE = #{goodsType,jdbcType=VARCHAR},
+      WEIGHT = #{weight,jdbcType=DECIMAL},
+      VOLUME_WEIGHT = #{volumeWeight,jdbcType=DECIMAL},
+      FAST_PRODUCT_TYPE = #{fastProductType,jdbcType=VARCHAR},
+      DATOUBI = #{datoubi,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=DECIMAL},
+      CANCEL_CAUSE = #{cancelCause,jdbcType=VARCHAR},
+      SOURCE_VERSION = #{sourceVersion,jdbcType=DECIMAL},
+      SOURCE_ID = #{sourceId,jdbcType=VARCHAR},
+      SOURCE_BIZID = #{sourceBizid,jdbcType=VARCHAR},
+      SOURCE_CUSTOMER_CODE = #{sourceCustomerCode,jdbcType=VARCHAR},
+      STORE_PRICE = #{storePrice,jdbcType=DECIMAL},
+      GOODS_VALUE = #{goodsValue,jdbcType=DECIMAL},
+      IS_COD = #{isCod,jdbcType=DECIMAL},
+      GOODS_PAYMENT = #{goodsPayment,jdbcType=DECIMAL},
+      TO_PAYMENT = #{toPayment,jdbcType=DECIMAL},
+      RETURN_BILL_FEE = #{returnBillFee,jdbcType=DECIMAL},
+      TRAN_FEE = #{tranFee,jdbcType=DECIMAL},
+      OTHER_FEE = #{otherFee,jdbcType=DECIMAL},
+      RETURN_BILL_CODE = #{returnBillCode,jdbcType=VARCHAR},
+      BL_STORE_PRICE = #{blStorePrice,jdbcType=DECIMAL},
+      BL_RETURN_BILL = #{blReturnBill,jdbcType=DECIMAL},
+      BL_RETU_BILL_SIGN = #{blRetuBillSign,jdbcType=DECIMAL},
+      SIGN_DATE = #{signDate,jdbcType=DATE},
+      BL_SIGN = #{blSign,jdbcType=DECIMAL},
+      DISP_MAN = #{dispMan,jdbcType=VARCHAR},
+      DISP_MAN_CODE = #{dispManCode,jdbcType=VARCHAR},
+      BL_BACK = #{blBack,jdbcType=DECIMAL},
+      MESSAGE_TYPE = #{messageType,jdbcType=DECIMAL},
+      SEND_BL_MESSAGE = #{sendBlMessage,jdbcType=DECIMAL},
+      RECEIVE_BL_MESSAGE = #{receiveBlMessage,jdbcType=DECIMAL},
+      SEND_SMS_TEMPLATE = #{sendSmsTemplate,jdbcType=VARCHAR},
+      RECEIVE_SMS_TEMPLATE = #{receiveSmsTemplate,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      DELETION_STATE_CODE = #{deletionStateCode,jdbcType=DECIMAL},
+      CREATE_ON = #{createOn,jdbcType=DATE},
+      CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATE_IP = #{createIp,jdbcType=VARCHAR},
+      MODIFIED_ON = #{modifiedOn,jdbcType=DATE},
+      MODIFIED_USER_ID = #{modifiedUserId,jdbcType=VARCHAR},
+      MODIFIED_BY = #{modifiedBy,jdbcType=VARCHAR},
+      MODIFIED_IP = #{modifiedIp,jdbcType=VARCHAR},
+      SYNC_TIME = #{syncTime,jdbcType=DATE},
+      FETCH_START_DATE = #{fetchStartDate,jdbcType=DATE},
+      FETCH_END_DATE = #{fetchEndDate,jdbcType=DATE},
+      GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
+      PRODUCT_TYPE = #{productType,jdbcType=VARCHAR},
+      BAIDU_LATITUDE = #{baiduLatitude,jdbcType=VARCHAR},
+      ASSIGN_CENTER_ID = #{assignCenterId,jdbcType=VARCHAR},
+      ASSIGN_CENTER_CODE = #{assignCenterCode,jdbcType=VARCHAR},
+      ASSIGN_CENTER_NAME = #{assignCenterName,jdbcType=VARCHAR},
+      PAY_TYPE = #{payType,jdbcType=VARCHAR},
+      CREATE_COMPANY_ID = #{createCompanyId,jdbcType=VARCHAR},
+      CREATE_COMPANY = #{createCompany,jdbcType=VARCHAR},
+      MODIFIED_COMPANY_ID = #{modifiedCompanyId,jdbcType=VARCHAR},
+      MODIFIED_COMPANY = #{modifiedCompany,jdbcType=VARCHAR},
+      BOX_CODE = #{boxCode,jdbcType=VARCHAR},
+      GAODE_LATITUDE = #{gaodeLatitude,jdbcType=VARCHAR},
+      GAODE_LONGITUDE = #{gaodeLongitude,jdbcType=VARCHAR},
+      CUSTOMER_MESSAGE = #{customerMessage,jdbcType=VARCHAR},
+      OPEN_ID = #{openId,jdbcType=VARCHAR},
+      SOURCE_STATUS = #{sourceStatus,jdbcType=DECIMAL},
+      ASSIGN_MAN_PHONE = #{assignManPhone,jdbcType=VARCHAR},
+      SEND_MOBILE = #{sendMobile,jdbcType=VARCHAR},
+      WUTONG_ASSIGN_SITE_ID = #{wutongAssignSiteId,jdbcType=VARCHAR},
+      WUTONG_ASSIGN_SITE_CODE = #{wutongAssignSiteCode,jdbcType=VARCHAR},
+      WUTONG_ASSIGN_SITE_NAME = #{wutongAssignSiteName,jdbcType=VARCHAR},
+      ALLOT_TYPE = #{allotType,jdbcType=VARCHAR},
+      PRINT_CODE = #{printCode,jdbcType=VARCHAR},
+      SEND_EMAIL = #{sendEmail,jdbcType=VARCHAR},
+      REC_EMAIL = #{recEmail,jdbcType=VARCHAR},
+      BAIDU_LONGITUDE = #{baiduLongitude,jdbcType=VARCHAR},
+      JI_BAO = #{jiBao,jdbcType=VARCHAR},
+      JI_BAO_CODE = #{jiBaoCode,jdbcType=VARCHAR},
+      ID_CARD = #{idCard,jdbcType=VARCHAR},
+      MONTH_CUSTOMER = #{monthCustomer,jdbcType=VARCHAR},
+      PARENT_ORDER_ID = #{parentOrderId,jdbcType=VARCHAR},
+      PRINT_BILL_IMAGE_ID = #{printBillImageId,jdbcType=VARCHAR},
+      PICKUP_IMAGE_ID = #{pickupImageId,jdbcType=VARCHAR},
+      GOODS_IMAGE_ID = #{goodsImageId,jdbcType=VARCHAR},
+      PAY_STATUS = #{payStatus,jdbcType=VARCHAR},
+      TAKE_ORDER_DATE = #{takeOrderDate,jdbcType=DATE},
+      TAKE_ORDER_STATUS = #{takeOrderStatus,jdbcType=VARCHAR},
+      PICKUP_GOODS_DATE = #{pickupGoodsDate,jdbcType=DATE},
+      BIND_BILL_CODE_DATE = #{bindBillCodeDate,jdbcType=DATE},
+      SEND_COMPANY_NAME = #{sendCompanyName,jdbcType=VARCHAR},
+      REC_COMPANY_NAME = #{recCompanyName,jdbcType=VARCHAR},
+      SEND_USER_ADDRESS_ID = #{sendUserAddressId,jdbcType=VARCHAR},
+      REC_USER_ADDRESS_ID = #{recUserAddressId,jdbcType=VARCHAR},
+      PRINT_COUNT = #{printCount,jdbcType=DECIMAL},
+      PICKUP_TYPE = #{pickupType,jdbcType=VARCHAR},
+      COMMENT_LEVEL = #{commentLevel,jdbcType=DECIMAL},
+      REAL_FEE = #{realFee,jdbcType=DECIMAL},
+      SCHEDULE_STATUS = #{scheduleStatus,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
