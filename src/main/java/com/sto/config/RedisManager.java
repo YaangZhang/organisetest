@@ -1,5 +1,6 @@
 package com.sto.config;
 
+import com.sto.entity.BaseOrganizeEntity;
 import com.sto.service.RedisService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,6 +54,20 @@ public class RedisManager {
         if (!StringUtils.isEmpty(key)) {
             result = (List<T>)redisTemplate.opsForValue().get(key);
         }
+        return result;
+    }
+
+    /**
+     * 从缓存获取获取实体
+     * @param id
+     * @return
+     */
+    public static BaseOrganizeEntity getObjectByCache(String id) {
+        BaseOrganizeEntity result = null;
+        if (!StringUtils.isEmpty(id)) {
+
+        }
+
         return result;
     }
 

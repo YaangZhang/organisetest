@@ -32,12 +32,11 @@ public class BaseOrganizeAreaManager {
         }
         // string key = "OrganizeByCode:" + code;
         String key = getObjectCodeCacheKey(code);
-        //从缓存获取
-        BaseOrganizeEntity boe = getLocalCacheObjectByKey(key);
-        if (boe != null)
-        {
-            return boe;
-        }
+        //  TODO  从缓存获取
+//        BaseOrganizeEntity boe = getLocalCacheObjectByKey(key);
+//        if (boe != null)
+//            return boe;
+
 
 
         return area;

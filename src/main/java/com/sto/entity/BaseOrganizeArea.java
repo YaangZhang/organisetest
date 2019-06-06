@@ -3,6 +3,9 @@ package com.sto.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+/**
+ * 网点区域范围
+ */
 public class BaseOrganizeArea implements Serializable{
     private static final long serialVersionUID = 1L;
 
