@@ -31,8 +31,47 @@
     <result column="road_name" property="roadName" jdbcType="VARCHAR" />
   </resultMap>
 
+  <resultMap id="ExpressResultMap" type="com.sto.entity.BaseUserExpressEntity">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="IS_CHECK_BALANCE" jdbcType="INTEGER" property="isCheckBalance" />
+    <result column="TRANSFER_ADD_FEE" jdbcType="INTEGER" property="transferAddFee" />
+    <result column="OWNER_ID" jdbcType="VARCHAR" property="ownerId" />
+    <result column="OWNER_RANGE" jdbcType="VARCHAR" property="ownerRange" />
+    <result column="DISPATCH_ADD_FEE" jdbcType="INTEGER" property="dispatchAddFee" />
+    <result column="RECEIVE_AREA" jdbcType="VARCHAR" property="receiveArea" />
+    <result column="MODIFIED_USER_ID" jdbcType="VARCHAR" property="modifiedUserId" />
+    <result column="MODIFIED_BY" jdbcType="VARCHAR" property="modifiedBy" />
+    <result column="MODIFIED_ON" jdbcType="TIMESTAMP" property="modifiedOn" />
+    <result column="CREATE_USER_ID" jdbcType="VARCHAR" property="createUserId" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+    <result column="CREATE_ON" jdbcType="TIMESTAMP" property="createOn" />
+    <result column="WEB_ENABLED" jdbcType="INTEGER" property="webEnabled" />
+    <result column="DISP_AREA" jdbcType="VARCHAR" property="dispArea" />
+    <result column="LONGITUDE" jdbcType="VARCHAR" property="longitude" />
+    <result column="LATITUDE" jdbcType="VARCHAR" property="latitude" />
+    <result column="SAN_DUAN_MA" jdbcType="VARCHAR" property="sanDuanMa" />
+    <result column="IS_RECEIVE" jdbcType="INTEGER" property="isReceive" />
+    <result column="IS_DISP" jdbcType="INTEGER" property="isDisp" />
+    <result column="COMPANY_ID" jdbcType="VARCHAR" property="companyId" />
+    <result column="NETWORK_ORDERS" jdbcType="VARCHAR" property="networkOrders" />
+    <result column="ORDER_ASSIGN_TO" jdbcType="VARCHAR" property="orderAssignTo" />
+    <result column="COOPERATE_FUNCTION" jdbcType="VARCHAR" property="cooperateFunction" />
+  </resultMap>
+  <sql id="Express_Column_List">
+    ID, IS_CHECK_BALANCE, TRANSFER_ADD_FEE, OWNER_ID, OWNER_RANGE, DISPATCH_ADD_FEE,
+    RECEIVE_AREA, MODIFIED_USER_ID, MODIFIED_BY, MODIFIED_ON, CREATE_USER_ID, CREATE_BY,
+    CREATE_ON, WEB_ENABLED, DISP_AREA, LONGITUDE, LATITUDE, SAN_DUAN_MA, IS_RECEIVE,
+    IS_DISP, COMPANY_ID, NETWORK_ORDERS, ORDER_ASSIGN_TO, COOPERATE_FUNCTION
+  </sql>
+  <!-- <sql id="Express_Column_List" >
+      id, company_id, is_check_balance, transfer_add_fee, owner_id, owner_range, max_road, company_code,
+      user_code, create_on, create_user_id, create_by, modified_on, modified_user_id, modified_by,
+      enabled, deletion_state_code, audit_status, company_name, province, city, district,
+      sort_code
+    </sql>-->
+
   <sql id="Base_Column_List" >
-    id, business_district, place_name, road_name, odd_or_even, min_road, max_road, company_code, 
+    id, organize_from, place_name, road_name, odd_or_even, min_road, max_road, company_code,
     user_code, create_on, create_user_id, create_by, modified_on, modified_user_id, modified_by, 
     enabled, deletion_state_code, audit_status, company_name, province, city, district, 
     sort_code
@@ -91,7 +130,7 @@
     where road_name = #{roadName,jdbcType=VARCHAR}
   </select>
 
-<select id="getAreaListBycode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="getAreaListBycode" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />
     from base_organize_area
@@ -294,4 +333,127 @@
       sort_code = #{sortCode,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="getExpressAll" resultMap="ExpressResultMap"  >
+    SELECT
+    <include refid="Express_Column_List" />
+    FROM BASE_USER_EXPRESS
+  </select>
+  <select id="selectExpressById" resultMap="ExpressResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Express_Column_List" />
+    from BASE_USER_EXPRESS
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <!-- BASE_ORGANIZE -->
+  <resultMap id="OrganizeResultMap" type="com.sto.entity.BaseOrganizeEntity">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="CODE" jdbcType="VARCHAR" property="code" />
+    <result column="SHORT_NAME" jdbcType="VARCHAR" property="shortName" />
+    <result column="FULL_NAME" jdbcType="VARCHAR" property="fullName" />
+    <result column="STANDARD_NAME" jdbcType="VARCHAR" property="standardName" />
+    <result column="STANDARD_CODE" jdbcType="VARCHAR" property="standardCode" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="PARENT_NAME" jdbcType="VARCHAR" property="parentName" />
+    <result column="PARENT_CODE" jdbcType="VARCHAR" property="parentCode" />
+    <result column="COMPANY_ID" jdbcType="VARCHAR" property="companyId" />
+    <result column="COMPANY_CODE" jdbcType="VARCHAR" property="companyCode" />
+    <result column="COMPANY_NAME" jdbcType="VARCHAR" property="companyName" />
+    <result column="COST_CENTER_ID" jdbcType="VARCHAR" property="costCenterId" />
+    <result column="COST_CENTER_CODE" jdbcType="VARCHAR" property="costCenterCode" />
+    <result column="COST_CENTER" jdbcType="VARCHAR" property="costCenter" />
+    <result column="FINANCIAL_CENTER_ID" jdbcType="VARCHAR" property="financialCenterId" />
+    <result column="FINANCIAL_CENTER_CODE" jdbcType="VARCHAR" property="financialCenterCode" />
+    <result column="FINANCIAL_CENTER" jdbcType="VARCHAR" property="financialCenter" />
+    <result column="PROVINCE_SITE_ID" jdbcType="VARCHAR" property="provinceSiteId" />
+    <result column="PROVINCE_SITE_CODE" jdbcType="VARCHAR" property="provinceSiteCode" />
+    <result column="PROVINCE_SITE" jdbcType="VARCHAR" property="provinceSite" />
+    <result column="SORT_CODE" jdbcType="INTEGER" property="sortCode" />
+    <result column="CATEGORY_CODE" jdbcType="VARCHAR" property="categoryCode" />
+    <result column="LAYER" jdbcType="INTEGER" property="layer" />
+    <result column="OUTER_PHONE" jdbcType="VARCHAR" property="outerPhone" />
+    <result column="INNER_PHONE" jdbcType="VARCHAR" property="innerPhone" />
+    <result column="FAX" jdbcType="VARCHAR" property="fax" />
+    <result column="POSTAL_CODE" jdbcType="VARCHAR" property="postalCode" />
+    <result column="WEB" jdbcType="VARCHAR" property="web" />
+    <result column="IS_INNER_ORGANIZE" jdbcType="INTEGER" property="isInnerOrganize" />
+    <result column="BANK" jdbcType="VARCHAR" property="bank" />
+    <result column="BANK_ACCOUNT" jdbcType="VARCHAR" property="bankAccount" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="BIG_AREA" jdbcType="VARCHAR" property="bigArea" />
+    <result column="AREA" jdbcType="VARCHAR" property="area" />
+    <result column="JOINING_METHODS" jdbcType="VARCHAR" property="joiningMethods" />
+    <result column="CONTAIN_CHILD_NODES" jdbcType="INTEGER" property="containChildNodes" />
+    <result column="QUICK_QUERY" jdbcType="VARCHAR" property="quickQuery" />
+    <result column="SIMPLE_SPELLING" jdbcType="VARCHAR" property="simpleSpelling" />
+    <result column="PROVINCE_ID" jdbcType="VARCHAR" property="provinceId" />
+    <result column="PROVINCE" jdbcType="VARCHAR" property="province" />
+    <result column="CITY_ID" jdbcType="VARCHAR" property="cityId" />
+    <result column="CITY" jdbcType="VARCHAR" property="city" />
+    <result column="DISTRICT_ID" jdbcType="VARCHAR" property="districtId" />
+    <result column="DISTRICT" jdbcType="VARCHAR" property="district" />
+    <result column="STREET_ID" jdbcType="VARCHAR" property="streetId" />
+    <result column="STREET" jdbcType="VARCHAR" property="street" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="STATISTICAL_NAME" jdbcType="VARCHAR" property="statisticalName" />
+    <result column="MASTER_ID" jdbcType="VARCHAR" property="masterId" />
+    <result column="MASTER" jdbcType="VARCHAR" property="master" />
+    <result column="MASTER_MOBILE" jdbcType="VARCHAR" property="masterMobile" />
+    <result column="MASTER_QQ" jdbcType="VARCHAR" property="masterQq" />
+    <result column="EMERGENCY_CALL" jdbcType="VARCHAR" property="emergencyCall" />
+    <result column="BUSINESS_PHONE" jdbcType="VARCHAR" property="businessPhone" />
+    <result column="MANAGER" jdbcType="VARCHAR" property="manager" />
+    <result column="MANAGER_MOBILE" jdbcType="VARCHAR" property="managerMobile" />
+    <result column="MANAGER_QQ" jdbcType="VARCHAR" property="managerQq" />
+    <result column="SERVICE_MANAGER" jdbcType="VARCHAR" property="serviceManager" />
+    <result column="SERVICE_MANAGER_MOBILE" jdbcType="VARCHAR" property="serviceManagerMobile" />
+    <result column="SERVICE_MANAGER_ID" jdbcType="VARCHAR" property="serviceManagerId" />
+    <result column="COMPLAINT_PHONE" jdbcType="VARCHAR" property="complaintPhone" />
+    <result column="MANAGE_ID" jdbcType="VARCHAR" property="manageId" />
+    <result column="MANAGE_NAME" jdbcType="VARCHAR" property="manageName" />
+    <result column="DELETION_STATE_CODE" jdbcType="INTEGER" property="deletionStateCode" />
+    <result column="ENABLED" jdbcType="INTEGER" property="enabled" />
+    <result column="CREATE_ON" jdbcType="TIMESTAMP" property="createOn" />
+    <result column="CREATE_USER_ID" jdbcType="VARCHAR" property="createUserId" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+    <result column="MODIFIED_ON" jdbcType="TIMESTAMP" property="modifiedOn" />
+    <result column="MODIFIED_USER_ID" jdbcType="VARCHAR" property="modifiedUserId" />
+    <result column="MODIFIED_BY" jdbcType="VARCHAR" property="modifiedBy" />
+    <result column="SITE_TELEPHONE" jdbcType="VARCHAR" property="siteTelephone" />
+    <result column="WEB_ENABLED" jdbcType="INTEGER" property="webEnabled" />
+    <result column="MANAGER_PHONE" jdbcType="VARCHAR" property="managerPhone" />
+    <result column="SERVICE_MANAGER_PHONE" jdbcType="VARCHAR" property="serviceManagerPhone" />
+    <result column="SERVICE_MANAGER_QQ" jdbcType="VARCHAR" property="serviceManagerQq" />
+    <result column="MASTER_PHONE" jdbcType="VARCHAR" property="masterPhone" />
+    <result column="COUNTRY_ID" jdbcType="VARCHAR" property="countryId" />
+    <result column="COUNTRY" jdbcType="VARCHAR" property="country" />
+    <result column="ORGANIZE_FROM" jdbcType="VARCHAR" property="organizeFrom" />
+    <result column="AUDIT_STATUS" jdbcType="VARCHAR" property="auditStatus" />
+  </resultMap>
+  <sql id="Organize_Column_List">
+    ID, CODE, SHORT_NAME, FULL_NAME, STANDARD_NAME, STANDARD_CODE, PARENT_ID, PARENT_NAME,
+    PARENT_CODE, COMPANY_ID, COMPANY_CODE, COMPANY_NAME, COST_CENTER_ID, COST_CENTER_CODE,
+    COST_CENTER, FINANCIAL_CENTER_ID, FINANCIAL_CENTER_CODE, FINANCIAL_CENTER, PROVINCE_SITE_ID,
+    PROVINCE_SITE_CODE, PROVINCE_SITE, SORT_CODE, CATEGORY_CODE, LAYER, OUTER_PHONE,
+    INNER_PHONE, FAX, POSTAL_CODE, WEB, IS_INNER_ORGANIZE, BANK, BANK_ACCOUNT, DESCRIPTION,
+    BIG_AREA, AREA, JOINING_METHODS, CONTAIN_CHILD_NODES, QUICK_QUERY, SIMPLE_SPELLING,
+    PROVINCE_ID, PROVINCE, CITY_ID, CITY, DISTRICT_ID, DISTRICT, STREET_ID, STREET, ADDRESS,
+    STATISTICAL_NAME, MASTER_ID, MASTER, MASTER_MOBILE, MASTER_QQ, EMERGENCY_CALL, BUSINESS_PHONE,
+    MANAGER, MANAGER_MOBILE, MANAGER_QQ, SERVICE_MANAGER, SERVICE_MANAGER_MOBILE, SERVICE_MANAGER_ID,
+    COMPLAINT_PHONE, MANAGE_ID, MANAGE_NAME, DELETION_STATE_CODE, ENABLED, CREATE_ON,
+    CREATE_USER_ID, CREATE_BY, MODIFIED_ON, MODIFIED_USER_ID, MODIFIED_BY, SITE_TELEPHONE,
+    WEB_ENABLED, MANAGER_PHONE, SERVICE_MANAGER_PHONE, SERVICE_MANAGER_QQ, MASTER_PHONE,
+    COUNTRY_ID, COUNTRY, ORGANIZE_FROM, AUDIT_STATUS
+  </sql>
+  <select id="selectOrganizeById" parameterType="java.lang.String" resultMap="OrganizeResultMap">
+    select
+    <include refid="Organize_Column_List" />
+    from BASE_ORGANIZE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectOrganizeAll"  resultMap="OrganizeResultMap">
+    select
+    <include refid="Organize_Column_List" />
+    from BASE_ORGANIZE
+  </select>
 </mapper>

@@ -1,6 +1,8 @@
 package com.sto.mapper.one;
 
 import com.sto.entity.BaseOrganizeArea;
+import com.sto.entity.BaseOrganizeEntity;
+import com.sto.entity.BaseUserExpressEntity;
 import com.sto.param.AreaParam;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -32,4 +34,74 @@ public interface BaseOrganizeArea1Mapper {
     List<BaseOrganizeArea> getListByPage(AreaParam areaParam);
 
     int getCount(AreaParam areaParam);
+
+    /**
+     *
+     * @mbggenerated
+     */
+    int deleteById(String id);
+    int deleteAll();
+
+    /**
+     *
+     * @mbggenerated
+     */
+    int insertExpress(BaseUserExpressEntity record);
+
+    /**
+     *
+     * @mbggenerated
+     */
+    int insertExpressSelective(BaseUserExpressEntity record);
+
+    /**
+     *
+     * @mbggenerated
+     */
+    BaseUserExpressEntity selectById(String id);
+
+    /**
+     *
+     * @mbggenerated
+     */
+    int updateExpressSelective(BaseUserExpressEntity record);
+
+    /**
+     *
+     * @mbggenerated
+     */
+    int updateExpress(BaseUserExpressEntity record);
+
+    /* base_organize */
+    int deleteOrganizeById(String id);
+
+    /**
+     *
+     * @mbggenerated
+     */
+    int insertOrganize(BaseOrganizeEntity record);
+
+    /**
+     *
+     * @mbggenerated
+     */
+    int insertOrganizeSelective(BaseOrganizeEntity record);
+
+    /**
+     *
+     * @mbggenerated
+     */
+    BaseOrganizeEntity selectOrganizeById(String id);
+
+    /**
+     *
+     * @mbggenerated
+     */
+    int updateOrganizeSelective(BaseOrganizeEntity record);
+
+    /**
+     *
+     * @mbggenerated
+     */
+    int updateOrganize(BaseOrganizeEntity record);
 }

@@ -33,17 +33,20 @@ public class BaseOrganizeAreaManager {
         // string key = "OrganizeByCode:" + code;
         String key = getObjectCodeCacheKey(code);
         //  TODO  从缓存获取
-//        BaseOrganizeEntity boe = getLocalCacheObjectByKey(key);
-//        if (boe != null)
-//            return boe;
+        BaseOrganizeEntity boe = getLocalCacheObjectByKey(key);
+        if (boe != null)
+            return boe;
 
 
 
         return area;
     }
 
-    /// <summary>
-    /// 根据Key获取本地缓存的缓存对象。
+    /**
+     * 根据Key获取本地缓存的缓存对象。
+     * @param key   与缓存对象ID关联的Key值
+     * @return
+     */
     /// </summary>
     /// <param name="key">与缓存对象ID关联的Key值。</param>
     /// <param name="refreshCache">是否刷新缓存</param>
@@ -57,11 +60,11 @@ public class BaseOrganizeAreaManager {
         return boe;
     }
 
-    /// <summary>
-    /// 获取组织机构实体以Code搜索时在缓存中的Key。
-    /// </summary>
-    /// <param name="code">组织机构实体的Code值。</param>
-    /// <returns>缓存Key。</returns>
+    /**
+     * 获取组织机构实体以Code搜索时在缓存中的Key
+     * @param code  组织机构实体的Code值
+     * @return  缓存Key
+     */
     public String getObjectCodeCacheKey(String code) {
         return "OBC:" + code;
     }

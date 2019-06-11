@@ -2,6 +2,8 @@ package com.sto.mapper.two;
 
 import com.sto.entity.BaseArea;
 import com.sto.entity.BaseOrganizeArea;
+import com.sto.entity.BaseOrganizeEntity;
+import com.sto.entity.BaseUserExpressEntity;
 import com.sto.param.AreaParam;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -37,4 +39,13 @@ public interface BaseOrganizeArea2Mapper {
     List<BaseOrganizeArea> getListByPage(AreaParam areaParam);
 
     int getCount(AreaParam areaParam);
+
+//    int getOrganizeAll();
+
+    List<BaseUserExpressEntity> getExpressAll();
+    BaseUserExpressEntity selectExpressById(String id);
+
+    /* BASE_ORGANIZE */
+    BaseOrganizeEntity selectOrganizeById(String id);
+    List<BaseOrganizeEntity> selectOrganizeAll();
 }

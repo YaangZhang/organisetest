@@ -1,9 +1,7 @@
 package com.sto;
 
 import com.sto.config.RedisManager;
-import com.sto.entity.BaseArea;
-import com.sto.entity.BaseOrganizeArea;
-import com.sto.entity.Order;
+import com.sto.entity.*;
 import com.sto.mapper.one.BaseOrganizeArea1Mapper;
 import com.sto.mapper.one.OrderMapper;
 import com.sto.mapper.three.StoOrderCallMapper;
@@ -32,7 +30,6 @@ public class OrganisetestApplicationTests {
 	private BaseOrganizeArea1Mapper areaMapper;
 	@Autowired
 	private BaseOrganizeArea2Mapper areaMapper2;
-
 	@Autowired
 	private StoOrderCallMapper orderCallMapper;
 	@Autowired
@@ -47,6 +44,42 @@ public class OrganisetestApplicationTests {
 	@Test
 	public void testRedis(){
 		areaManager.getListByAreaCodeByCache("210202", true, false, true);
+	}
+
+	@Test
+	public void testOrganize(){
+//		BaseOrganizeEntity organizeEntity = areaMapper2.selectOrganizeById("fkty3ane");
+//		System.out.println(organizeEntity);
+//		areaMapper.insertOrganize(organizeEntity);
+
+		List<BaseOrganizeEntity> organizeEntities = areaMapper2.selectOrganizeAll();
+		organizeEntities.forEach(baseOrganizeEntity -> {
+			System.out.println(baseOrganizeEntity);
+			areaMapper.insertOrganize(baseOrganizeEntity);
+			System.out.println("organizeEntities.size()  = "+organizeEntities.size());
+		});
+	}
+
+	@Test
+	public void testDate(){
+//		BaseUserExpressEntity expressEntity = areaMapper2.selectExpressById("920bc0384f934d809b49985c62844732");
+//		System.out.println(expressEntity);
+//		int i = areaMapper.insertExpress(expressEntity);
+//		BaseUserExpressEntity entity = areaMapper.selectById("920bc0384f934d809b49985c62844732");
+////		BaseUserExpressEntity entity = areaMapper.selectById("2c01bbb4e2db4b61bd4cf5648261b8dc");
+//		System.out.println(entity);
+		List<BaseUserExpressEntity> expressAll = areaMapper2.getExpressAll();
+		System.out.println("expressAll.size() = "+expressAll.size());
+		for (int i1 = 0; i1 < expressAll.size(); i1++) {
+			BaseUserExpressEntity entity = expressAll.get(i1);
+			System.out.println(i1+"  =  "+entity);
+			areaMapper.insertExpress(entity);
+		}
+//		expressAll.forEach(baseUserExpressEntity -> {
+//			System.out.println(baseUserExpressEntity);
+//			areaMapper.insertExpress(baseUserExpressEntity);
+//		});
+		System.out.println("expressAll.size() = "+expressAll.size());
 	}
 
 	@Test
@@ -87,14 +120,14 @@ public class OrganisetestApplicationTests {
 			redisManager.SetListCacheCommon("AreaCode2:" + area.getBusinessDistrict(), areaList, 120L);
 			redisService.set("AreaCode1:" + area.getBusinessDistrict(), areaList, 120L);
 		});
-		List<BaseOrganizeArea> list1 = redisService.getList("AreaCode1:210202", BaseOrganizeArea.class);
-		list1.forEach(area1 -> {
-			System.out.println("area1 = "+area1);
-		});
-		List<BaseOrganizeArea> list2 = redisManager.GetListCacheCommon("AreaCode2:210202");
-		list2.forEach(area2 -> {
-			System.out.println("area2 = "+area2);
-		});
+//		List<BaseOrganizeArea> list1 = redisService.getList("AreaCode1:210202", BaseOrganizeArea.class);
+//		list1.forEach(area1 -> {
+//			System.out.println("area1 = "+area1);
+//		});
+//		List<BaseOrganizeArea> list2 = redisManager.GetListCacheCommon("AreaCode2:210202");
+//		list2.forEach(area2 -> {
+//			System.out.println("area2 = "+area2);
+//		});
 
 	}
 
@@ -102,8 +135,8 @@ public class OrganisetestApplicationTests {
 	public void contextLoads() {
 		Order order = orderCallMapper.getOrderByOrderId("ST194115034693");
 		System.out.println("order = "+order);
-		int insert = orderMapper.insertSelective(order);
-		System.out.println("insert ="+ insert +"order ="+ order);
+//		int insert = orderMapper.insertSelective(order);
+//		System.out.println("insert ="+ insert +"order ="+ order);
 	}
 
 	@Test

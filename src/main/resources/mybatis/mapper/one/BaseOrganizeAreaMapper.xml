@@ -30,14 +30,45 @@
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="road_name" property="roadName" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="ExpressResultMap" type="com.sto.entity.BaseUserExpressEntity">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="is_check_balance" jdbcType="INTEGER" property="isCheckBalance" />
+    <result column="transfer_add_fee" jdbcType="INTEGER" property="transferAddFee" />
+    <result column="owner_id" jdbcType="VARCHAR" property="ownerId" />
+    <result column="owner_range" jdbcType="VARCHAR" property="ownerRange" />
+    <result column="dispatch_add_fee" jdbcType="INTEGER" property="dispatchAddFee" />
+    <result column="receive_area" jdbcType="VARCHAR" property="receiveArea" />
+    <result column="modified_user_id" jdbcType="VARCHAR" property="modifiedUserId" />
+    <result column="modified_by" jdbcType="VARCHAR" property="modifiedBy" />
+    <result column="modified_on" jdbcType="TIMESTAMP" property="modifiedOn" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_on" jdbcType="TIMESTAMP" property="createOn" />
+    <result column="web_enabled" jdbcType="INTEGER" property="webEnabled" />
+    <result column="disp_area" jdbcType="VARCHAR" property="dispArea" />
+    <result column="longitude" jdbcType="VARCHAR" property="longitude" />
+    <result column="latitude" jdbcType="VARCHAR" property="latitude" />
+    <result column="san_duan_ma" jdbcType="VARCHAR" property="sanDuanMa" />
+    <result column="is_receive" jdbcType="INTEGER" property="isReceive" />
+    <result column="is_disp" jdbcType="INTEGER" property="isDisp" />
+    <result column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <result column="network_orders" jdbcType="INTEGER" property="networkOrders" />
+    <result column="order_assign_to" jdbcType="VARCHAR" property="orderAssignTo" />
+    <result column="cooperate_function" jdbcType="VARCHAR" property="cooperateFunction" />
 
+  </resultMap>
+  <sql id="Express_Column_List">
+    id, is_check_balance, transfer_add_fee, owner_id, owner_range, dispatch_add_fee,
+    receive_area, modified_user_id, modified_by, modified_on, create_user_id, create_by,
+    create_on, web_enabled, disp_area, longitude, latitude, san_duan_ma, is_receive,
+    is_disp, company_id,network_orders, order_assign_to, cooperate_function
+  </sql>
   <sql id="Base_Column_List" >
     id, business_district, place_name, road_name, odd_or_even, min_road, max_road, company_code, 
     user_code, create_on, create_user_id, create_by, modified_on, modified_user_id, modified_by, 
     enabled, deletion_state_code, audit_status, company_name, province, city, district, 
     sort_code
   </sql>
-
   <sql id="Base_Where_List">
     <if test="businessDistrict != null  and businessDistrict != ''">
       and business_district = #{businessDistrict}
@@ -46,7 +77,7 @@
       and company_code = #{companyCode}
     </if>
   </sql>
-
+<!---->
   <select id="getListByPage" resultMap="BaseResultMap" parameterType="com.sto.param.AreaParam">
     select
     <include refid="Base_Column_List" />
@@ -63,13 +94,11 @@
     where 1=1
     <include refid="Base_Where_List" />
   </select>
-
   <select id="getAll" resultMap="BaseResultMap"  >
     SELECT
     <include refid="Base_Column_List" />
     FROM base_organize_area
   </select>
-
   <select id="getRoadByProCity" resultMap="RoadResultMap"  >
     SELECT
     id,road_name
@@ -78,8 +107,6 @@
     province = #{pro, jdbcType=VARCHAR}
     AND city=#{city, jdbcType=VARCHAR}
   </select>
-
-
  <!-- <select id="getCompanyCodeById" resultMap="java.lang.String" parameterType="java.lang.String" >
     select 
     company_code
@@ -92,8 +119,7 @@
     from base_organize_area
     where id = #{id,jdbcType=VARCHAR}
   </select>
-
-<select id="getAreaListBycode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="getAreaListBycode" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />
     from base_organize_area
@@ -101,13 +127,10 @@
     and enabled = 1
     and business_district = #{businessDistrict,jdbcType=VARCHAR}
   </select>
-
-
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from base_organize_area
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-
   <insert id="insert" parameterType="com.sto.entity.BaseOrganizeArea" >
     insert into base_organize_area (id, business_district, place_name, 
       road_name, odd_or_even, min_road, 
@@ -271,7 +294,6 @@
       </if>
     </trim>
   </insert>
-
   <update id="updateByPrimaryKey" parameterType="com.sto.entity.BaseOrganizeArea" >
     update base_organize_area
     set business_district = #{businessDistrict,jdbcType=VARCHAR},
@@ -298,4 +320,1266 @@
       sort_code = #{sortCode,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+<!--BASE_USER_EXPRESS-->
+  <select id="selectById" parameterType="java.lang.String" resultMap="ExpressResultMap">
+    select
+    <include refid="Express_Column_List" />
+    from base_user_express
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.String">
+    delete from base_user_express
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteAll" >
+    delete from base_user_express
+  </delete>
+  <insert id="insertExpress" parameterType="com.sto.entity.BaseUserExpressEntity">
+    insert into base_user_express (id, is_check_balance, transfer_add_fee,
+      owner_id, owner_range, dispatch_add_fee,
+      receive_area, modified_user_id, modified_by,
+      modified_on, create_user_id, create_by,
+      create_on, web_enabled, disp_area,
+      longitude, latitude, san_duan_ma,
+      is_receive, is_disp, company_id, network_orders, order_assign_to, cooperate_function
+      )
+    values (#{id,jdbcType=VARCHAR}, #{isCheckBalance,jdbcType=INTEGER}, #{transferAddFee,jdbcType=INTEGER},
+      #{ownerId,jdbcType=VARCHAR}, #{ownerRange,jdbcType=VARCHAR}, #{dispatchAddFee,jdbcType=INTEGER},
+      #{receiveArea,jdbcType=VARCHAR}, #{modifiedUserId,jdbcType=VARCHAR}, #{modifiedBy,jdbcType=VARCHAR},
+      #{modifiedOn,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR},
+      #{createOn,jdbcType=TIMESTAMP}, #{webEnabled,jdbcType=INTEGER}, #{dispArea,jdbcType=VARCHAR},
+      #{longitude,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}, #{sanDuanMa,jdbcType=VARCHAR},
+      #{isReceive,jdbcType=INTEGER}, #{isDisp,jdbcType=INTEGER}, #{companyId,jdbcType=VARCHAR},
+      #{networkOrders,jdbcType=INTEGER}, #{orderAssignTo,jdbcType=VARCHAR}, #{cooperateFunction,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertExpressSelective" parameterType="com.sto.entity.BaseUserExpressEntity">
+    insert into base_user_express
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="isCheckBalance != null">
+        IS_CHECK_BALANCE,
+      </if>
+      <if test="transferAddFee != null">
+        TRANSFER_ADD_FEE,
+      </if>
+      <if test="ownerId != null">
+        OWNER_ID,
+      </if>
+      <if test="ownerRange != null">
+        OWNER_RANGE,
+      </if>
+      <if test="dispatchAddFee != null">
+        DISPATCH_ADD_FEE,
+      </if>
+      <if test="receiveArea != null">
+        RECEIVE_AREA,
+      </if>
+      <if test="modifiedUserId != null">
+        MODIFIED_USER_ID,
+      </if>
+      <if test="modifiedBy != null">
+        MODIFIED_BY,
+      </if>
+      <if test="modifiedOn != null">
+        MODIFIED_ON,
+      </if>
+      <if test="createUserId != null">
+        CREATE_USER_ID,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="createOn != null">
+        CREATE_ON,
+      </if>
+      <if test="webEnabled != null">
+        WEB_ENABLED,
+      </if>
+      <if test="dispArea != null">
+        DISP_AREA,
+      </if>
+      <if test="longitude != null">
+        LONGITUDE,
+      </if>
+      <if test="latitude != null">
+        LATITUDE,
+      </if>
+      <if test="sanDuanMa != null">
+        SAN_DUAN_MA,
+      </if>
+      <if test="isReceive != null">
+        IS_RECEIVE,
+      </if>
+      <if test="isDisp != null">
+        IS_DISP,
+      </if>
+      <if test="companyId != null">
+        COMPANY_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="isCheckBalance != null">
+        #{isCheckBalance,jdbcType=INTEGER},
+      </if>
+      <if test="transferAddFee != null">
+        #{transferAddFee,jdbcType=INTEGER},
+      </if>
+      <if test="ownerId != null">
+        #{ownerId,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerRange != null">
+        #{ownerRange,jdbcType=VARCHAR},
+      </if>
+      <if test="dispatchAddFee != null">
+        #{dispatchAddFee,jdbcType=INTEGER},
+      </if>
+      <if test="receiveArea != null">
+        #{receiveArea,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedUserId != null">
+        #{modifiedUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedBy != null">
+        #{modifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedOn != null">
+        #{modifiedOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createOn != null">
+        #{createOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="webEnabled != null">
+        #{webEnabled,jdbcType=INTEGER},
+      </if>
+      <if test="dispArea != null">
+        #{dispArea,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="sanDuanMa != null">
+        #{sanDuanMa,jdbcType=VARCHAR},
+      </if>
+      <if test="isReceive != null">
+        #{isReceive,jdbcType=INTEGER},
+      </if>
+      <if test="isDisp != null">
+        #{isDisp,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateExpressSelective" parameterType="com.sto.entity.BaseUserExpressEntity">
+    update BASE_USER_EXPRESS
+    <set>
+      <if test="isCheckBalance != null">
+        IS_CHECK_BALANCE = #{isCheckBalance,jdbcType=INTEGER},
+      </if>
+      <if test="transferAddFee != null">
+        TRANSFER_ADD_FEE = #{transferAddFee,jdbcType=INTEGER},
+      </if>
+      <if test="ownerId != null">
+        OWNER_ID = #{ownerId,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerRange != null">
+        OWNER_RANGE = #{ownerRange,jdbcType=VARCHAR},
+      </if>
+      <if test="dispatchAddFee != null">
+        DISPATCH_ADD_FEE = #{dispatchAddFee,jdbcType=INTEGER},
+      </if>
+      <if test="receiveArea != null">
+        RECEIVE_AREA = #{receiveArea,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedUserId != null">
+        MODIFIED_USER_ID = #{modifiedUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedBy != null">
+        MODIFIED_BY = #{modifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedOn != null">
+        MODIFIED_ON = #{modifiedOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createOn != null">
+        CREATE_ON = #{createOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="webEnabled != null">
+        WEB_ENABLED = #{webEnabled,jdbcType=INTEGER},
+      </if>
+      <if test="dispArea != null">
+        DISP_AREA = #{dispArea,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        LONGITUDE = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        LATITUDE = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="sanDuanMa != null">
+        SAN_DUAN_MA = #{sanDuanMa,jdbcType=VARCHAR},
+      </if>
+      <if test="isReceive != null">
+        IS_RECEIVE = #{isReceive,jdbcType=INTEGER},
+      </if>
+      <if test="isDisp != null">
+        IS_DISP = #{isDisp,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null">
+        COMPANY_ID = #{companyId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateExpress" parameterType="com.sto.entity.BaseUserExpressEntity">
+    update base_user_express
+    set is_check_balance = #{isCheckBalance,jdbcType=INTEGER},
+      transfer_add_fee = #{transferAddFee,jdbcType=INTEGER},
+      owner_id = #{ownerId,jdbcType=VARCHAR},
+      owner_range = #{ownerRange,jdbcType=VARCHAR},
+      dispatch_add_fee = #{dispatchAddFee,jdbcType=INTEGER},
+      receive_area = #{receiveArea,jdbcType=VARCHAR},
+      modified_user_id = #{modifiedUserId,jdbcType=VARCHAR},
+      modified_by = #{modifiedBy,jdbcType=VARCHAR},
+      modified_on = #{modifiedOn,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_on = #{createOn,jdbcType=TIMESTAMP},
+      web_enabled = #{webEnabled,jdbcType=INTEGER},
+      disp_area = #{dispArea,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      san_duan_ma = #{sanDuanMa,jdbcType=VARCHAR},
+      is_receive = #{isReceive,jdbcType=INTEGER},
+      is_disp = #{isDisp,jdbcType=INTEGER},
+      company_id = #{companyId,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <!-- base_organize -->
+  <resultMap id="OrganizeResultMap" type="com.sto.entity.BaseOrganizeEntity">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="CODE" jdbcType="VARCHAR" property="code" />
+    <result column="SHORT_NAME" jdbcType="VARCHAR" property="shortName" />
+    <result column="FULL_NAME" jdbcType="VARCHAR" property="fullName" />
+    <result column="STANDARD_NAME" jdbcType="VARCHAR" property="standardName" />
+    <result column="STANDARD_CODE" jdbcType="VARCHAR" property="standardCode" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="PARENT_NAME" jdbcType="VARCHAR" property="parentName" />
+    <result column="PARENT_CODE" jdbcType="VARCHAR" property="parentCode" />
+    <result column="COMPANY_ID" jdbcType="VARCHAR" property="companyId" />
+    <result column="COMPANY_CODE" jdbcType="VARCHAR" property="companyCode" />
+    <result column="COMPANY_NAME" jdbcType="VARCHAR" property="companyName" />
+    <result column="COST_CENTER_ID" jdbcType="VARCHAR" property="costCenterId" />
+    <result column="COST_CENTER_CODE" jdbcType="VARCHAR" property="costCenterCode" />
+    <result column="COST_CENTER" jdbcType="VARCHAR" property="costCenter" />
+    <result column="FINANCIAL_CENTER_ID" jdbcType="VARCHAR" property="financialCenterId" />
+    <result column="FINANCIAL_CENTER_CODE" jdbcType="VARCHAR" property="financialCenterCode" />
+    <result column="FINANCIAL_CENTER" jdbcType="VARCHAR" property="financialCenter" />
+    <result column="PROVINCE_SITE_ID" jdbcType="VARCHAR" property="provinceSiteId" />
+    <result column="PROVINCE_SITE_CODE" jdbcType="VARCHAR" property="provinceSiteCode" />
+    <result column="PROVINCE_SITE" jdbcType="VARCHAR" property="provinceSite" />
+    <result column="SORT_CODE" jdbcType="INTEGER" property="sortCode" />
+    <result column="CATEGORY_CODE" jdbcType="VARCHAR" property="categoryCode" />
+    <result column="LAYER" jdbcType="INTEGER" property="layer" />
+    <result column="OUTER_PHONE" jdbcType="VARCHAR" property="outerPhone" />
+    <result column="INNER_PHONE" jdbcType="VARCHAR" property="innerPhone" />
+    <result column="FAX" jdbcType="VARCHAR" property="fax" />
+    <result column="POSTAL_CODE" jdbcType="VARCHAR" property="postalCode" />
+    <result column="WEB" jdbcType="VARCHAR" property="web" />
+    <result column="IS_INNER_ORGANIZE" jdbcType="INTEGER" property="isInnerOrganize" />
+    <result column="BANK" jdbcType="VARCHAR" property="bank" />
+    <result column="BANK_ACCOUNT" jdbcType="VARCHAR" property="bankAccount" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="BIG_AREA" jdbcType="VARCHAR" property="bigArea" />
+    <result column="AREA" jdbcType="VARCHAR" property="area" />
+    <result column="JOINING_METHODS" jdbcType="VARCHAR" property="joiningMethods" />
+    <result column="CONTAIN_CHILD_NODES" jdbcType="INTEGER" property="containChildNodes" />
+    <result column="QUICK_QUERY" jdbcType="VARCHAR" property="quickQuery" />
+    <result column="SIMPLE_SPELLING" jdbcType="VARCHAR" property="simpleSpelling" />
+    <result column="PROVINCE_ID" jdbcType="VARCHAR" property="provinceId" />
+    <result column="PROVINCE" jdbcType="VARCHAR" property="province" />
+    <result column="CITY_ID" jdbcType="VARCHAR" property="cityId" />
+    <result column="CITY" jdbcType="VARCHAR" property="city" />
+    <result column="DISTRICT_ID" jdbcType="VARCHAR" property="districtId" />
+    <result column="DISTRICT" jdbcType="VARCHAR" property="district" />
+    <result column="STREET_ID" jdbcType="VARCHAR" property="streetId" />
+    <result column="STREET" jdbcType="VARCHAR" property="street" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="STATISTICAL_NAME" jdbcType="VARCHAR" property="statisticalName" />
+    <result column="MASTER_ID" jdbcType="VARCHAR" property="masterId" />
+    <result column="MASTER" jdbcType="VARCHAR" property="master" />
+    <result column="MASTER_MOBILE" jdbcType="VARCHAR" property="masterMobile" />
+    <result column="MASTER_QQ" jdbcType="VARCHAR" property="masterQq" />
+    <result column="EMERGENCY_CALL" jdbcType="VARCHAR" property="emergencyCall" />
+    <result column="BUSINESS_PHONE" jdbcType="VARCHAR" property="businessPhone" />
+    <result column="MANAGER" jdbcType="VARCHAR" property="manager" />
+    <result column="MANAGER_MOBILE" jdbcType="VARCHAR" property="managerMobile" />
+    <result column="MANAGER_QQ" jdbcType="VARCHAR" property="managerQq" />
+    <result column="SERVICE_MANAGER" jdbcType="VARCHAR" property="serviceManager" />
+    <result column="SERVICE_MANAGER_MOBILE" jdbcType="VARCHAR" property="serviceManagerMobile" />
+    <result column="SERVICE_MANAGER_ID" jdbcType="VARCHAR" property="serviceManagerId" />
+    <result column="COMPLAINT_PHONE" jdbcType="VARCHAR" property="complaintPhone" />
+    <result column="MANAGE_ID" jdbcType="VARCHAR" property="manageId" />
+    <result column="MANAGE_NAME" jdbcType="VARCHAR" property="manageName" />
+    <result column="DELETION_STATE_CODE" jdbcType="INTEGER" property="deletionStateCode" />
+    <result column="ENABLED" jdbcType="INTEGER" property="enabled" />
+    <result column="CREATE_ON" jdbcType="TIMESTAMP" property="createOn" />
+    <result column="CREATE_USER_ID" jdbcType="VARCHAR" property="createUserId" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+    <result column="MODIFIED_ON" jdbcType="TIMESTAMP" property="modifiedOn" />
+    <result column="MODIFIED_USER_ID" jdbcType="VARCHAR" property="modifiedUserId" />
+    <result column="MODIFIED_BY" jdbcType="VARCHAR" property="modifiedBy" />
+    <result column="SITE_TELEPHONE" jdbcType="VARCHAR" property="siteTelephone" />
+    <result column="WEB_ENABLED" jdbcType="INTEGER" property="webEnabled" />
+    <result column="MANAGER_PHONE" jdbcType="VARCHAR" property="managerPhone" />
+    <result column="SERVICE_MANAGER_PHONE" jdbcType="VARCHAR" property="serviceManagerPhone" />
+    <result column="SERVICE_MANAGER_QQ" jdbcType="VARCHAR" property="serviceManagerQq" />
+    <result column="MASTER_PHONE" jdbcType="VARCHAR" property="masterPhone" />
+    <result column="COUNTRY_ID" jdbcType="VARCHAR" property="countryId" />
+    <result column="COUNTRY" jdbcType="VARCHAR" property="country" />
+    <result column="ORGANIZE_FROM" jdbcType="VARCHAR" property="organizeFrom" />
+    <result column="AUDIT_STATUS" jdbcType="VARCHAR" property="auditStatus" />
+  </resultMap>
+  <sql id="Organize_Column_List">
+    ID, CODE, SHORT_NAME, FULL_NAME, STANDARD_NAME, STANDARD_CODE, PARENT_ID, PARENT_NAME,
+    PARENT_CODE, COMPANY_ID, COMPANY_CODE, COMPANY_NAME, COST_CENTER_ID, COST_CENTER_CODE,
+    COST_CENTER, FINANCIAL_CENTER_ID, FINANCIAL_CENTER_CODE, FINANCIAL_CENTER, PROVINCE_SITE_ID,
+    PROVINCE_SITE_CODE, PROVINCE_SITE, SORT_CODE, CATEGORY_CODE, LAYER, OUTER_PHONE,
+    INNER_PHONE, FAX, POSTAL_CODE, WEB, IS_INNER_ORGANIZE, BANK, BANK_ACCOUNT, DESCRIPTION,
+    BIG_AREA, AREA, JOINING_METHODS, CONTAIN_CHILD_NODES, QUICK_QUERY, SIMPLE_SPELLING,
+    PROVINCE_ID, PROVINCE, CITY_ID, CITY, DISTRICT_ID, DISTRICT, STREET_ID, STREET, ADDRESS,
+    STATISTICAL_NAME, MASTER_ID, MASTER, MASTER_MOBILE, MASTER_QQ, EMERGENCY_CALL, BUSINESS_PHONE,
+    MANAGER, MANAGER_MOBILE, MANAGER_QQ, SERVICE_MANAGER, SERVICE_MANAGER_MOBILE, SERVICE_MANAGER_ID,
+    COMPLAINT_PHONE, MANAGE_ID, MANAGE_NAME, DELETION_STATE_CODE, ENABLED, CREATE_ON,
+    CREATE_USER_ID, CREATE_BY, MODIFIED_ON, MODIFIED_USER_ID, MODIFIED_BY, SITE_TELEPHONE,
+    WEB_ENABLED, MANAGER_PHONE, SERVICE_MANAGER_PHONE, SERVICE_MANAGER_QQ, MASTER_PHONE,
+    COUNTRY_ID, COUNTRY, ORGANIZE_FROM, AUDIT_STATUS
+  </sql>
+  <select id="selectOrganizeById" parameterType="java.lang.String" resultMap="OrganizeResultMap">
+    select
+    <include refid="Organize_Column_List" />
+    from BASE_ORGANIZE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteOrganizeById" parameterType="java.lang.String">
+    delete from BASE_ORGANIZE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insertOrganize" parameterType="com.sto.entity.BaseOrganizeEntity">
+    insert into BASE_ORGANIZE (ID, CODE, SHORT_NAME,
+      FULL_NAME, STANDARD_NAME, STANDARD_CODE,
+      PARENT_ID, PARENT_NAME, PARENT_CODE,
+      COMPANY_ID, COMPANY_CODE, COMPANY_NAME,
+      COST_CENTER_ID, COST_CENTER_CODE, COST_CENTER,
+      FINANCIAL_CENTER_ID, FINANCIAL_CENTER_CODE,
+      FINANCIAL_CENTER, PROVINCE_SITE_ID, PROVINCE_SITE_CODE,
+      PROVINCE_SITE, SORT_CODE, CATEGORY_CODE,
+      LAYER, OUTER_PHONE, INNER_PHONE,
+      FAX, POSTAL_CODE, WEB,
+      IS_INNER_ORGANIZE, BANK, BANK_ACCOUNT,
+      DESCRIPTION, BIG_AREA, AREA,
+      JOINING_METHODS, CONTAIN_CHILD_NODES, QUICK_QUERY,
+      SIMPLE_SPELLING, PROVINCE_ID, PROVINCE,
+      CITY_ID, CITY, DISTRICT_ID,
+      DISTRICT, STREET_ID, STREET,
+      ADDRESS, STATISTICAL_NAME, MASTER_ID,
+      MASTER, MASTER_MOBILE, MASTER_QQ,
+      EMERGENCY_CALL, BUSINESS_PHONE, MANAGER,
+      MANAGER_MOBILE, MANAGER_QQ, SERVICE_MANAGER,
+      SERVICE_MANAGER_MOBILE, SERVICE_MANAGER_ID,
+      COMPLAINT_PHONE, MANAGE_ID, MANAGE_NAME,
+      DELETION_STATE_CODE, ENABLED, CREATE_ON,
+      CREATE_USER_ID, CREATE_BY, MODIFIED_ON,
+      MODIFIED_USER_ID, MODIFIED_BY, SITE_TELEPHONE,
+      WEB_ENABLED, MANAGER_PHONE, SERVICE_MANAGER_PHONE,
+      SERVICE_MANAGER_QQ, MASTER_PHONE, COUNTRY_ID,
+      COUNTRY, ORGANIZE_FROM, AUDIT_STATUS
+      )
+    values (#{id,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR},
+      #{fullName,jdbcType=VARCHAR}, #{standardName,jdbcType=VARCHAR}, #{standardCode,jdbcType=VARCHAR},
+      #{parentId,jdbcType=VARCHAR}, #{parentName,jdbcType=VARCHAR}, #{parentCode,jdbcType=VARCHAR},
+      #{companyId,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR},
+      #{costCenterId,jdbcType=VARCHAR}, #{costCenterCode,jdbcType=VARCHAR}, #{costCenter,jdbcType=VARCHAR},
+      #{financialCenterId,jdbcType=VARCHAR}, #{financialCenterCode,jdbcType=VARCHAR},
+      #{financialCenter,jdbcType=VARCHAR}, #{provinceSiteId,jdbcType=VARCHAR}, #{provinceSiteCode,jdbcType=VARCHAR},
+      #{provinceSite,jdbcType=VARCHAR}, #{sortCode,jdbcType=INTEGER}, #{categoryCode,jdbcType=VARCHAR},
+      #{layer,jdbcType=INTEGER}, #{outerPhone,jdbcType=VARCHAR}, #{innerPhone,jdbcType=VARCHAR},
+      #{fax,jdbcType=VARCHAR}, #{postalCode,jdbcType=VARCHAR}, #{web,jdbcType=VARCHAR},
+      #{isInnerOrganize,jdbcType=INTEGER}, #{bank,jdbcType=VARCHAR}, #{bankAccount,jdbcType=VARCHAR},
+      #{description,jdbcType=VARCHAR}, #{bigArea,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR},
+      #{joiningMethods,jdbcType=VARCHAR}, #{containChildNodes,jdbcType=INTEGER}, #{quickQuery,jdbcType=VARCHAR},
+      #{simpleSpelling,jdbcType=VARCHAR}, #{provinceId,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR},
+      #{cityId,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{districtId,jdbcType=VARCHAR},
+      #{district,jdbcType=VARCHAR}, #{streetId,jdbcType=VARCHAR}, #{street,jdbcType=VARCHAR},
+      #{address,jdbcType=VARCHAR}, #{statisticalName,jdbcType=VARCHAR}, #{masterId,jdbcType=VARCHAR},
+      #{master,jdbcType=VARCHAR}, #{masterMobile,jdbcType=VARCHAR}, #{masterQq,jdbcType=VARCHAR},
+      #{emergencyCall,jdbcType=VARCHAR}, #{businessPhone,jdbcType=VARCHAR}, #{manager,jdbcType=VARCHAR},
+      #{managerMobile,jdbcType=VARCHAR}, #{managerQq,jdbcType=VARCHAR}, #{serviceManager,jdbcType=VARCHAR},
+      #{serviceManagerMobile,jdbcType=VARCHAR}, #{serviceManagerId,jdbcType=VARCHAR},
+      #{complaintPhone,jdbcType=VARCHAR}, #{manageId,jdbcType=VARCHAR}, #{manageName,jdbcType=VARCHAR},
+      #{deletionStateCode,jdbcType=INTEGER}, #{enabled,jdbcType=INTEGER}, #{createOn,jdbcType=TIMESTAMP},
+      #{createUserId,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{modifiedOn,jdbcType=TIMESTAMP},
+      #{modifiedUserId,jdbcType=VARCHAR}, #{modifiedBy,jdbcType=VARCHAR}, #{siteTelephone,jdbcType=VARCHAR},
+      #{webEnabled,jdbcType=INTEGER}, #{managerPhone,jdbcType=VARCHAR}, #{serviceManagerPhone,jdbcType=VARCHAR},
+      #{serviceManagerQq,jdbcType=VARCHAR}, #{masterPhone,jdbcType=VARCHAR}, #{countryId,jdbcType=VARCHAR},
+      #{country,jdbcType=VARCHAR}, #{organizeFrom,jdbcType=VARCHAR}, #{auditStatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertOrganizeSelective" parameterType="com.sto.entity.BaseOrganizeEntity">
+    insert into BASE_ORGANIZE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="code != null">
+        CODE,
+      </if>
+      <if test="shortName != null">
+        SHORT_NAME,
+      </if>
+      <if test="fullName != null">
+        FULL_NAME,
+      </if>
+      <if test="standardName != null">
+        STANDARD_NAME,
+      </if>
+      <if test="standardCode != null">
+        STANDARD_CODE,
+      </if>
+      <if test="parentId != null">
+        PARENT_ID,
+      </if>
+      <if test="parentName != null">
+        PARENT_NAME,
+      </if>
+      <if test="parentCode != null">
+        PARENT_CODE,
+      </if>
+      <if test="companyId != null">
+        COMPANY_ID,
+      </if>
+      <if test="companyCode != null">
+        COMPANY_CODE,
+      </if>
+      <if test="companyName != null">
+        COMPANY_NAME,
+      </if>
+      <if test="costCenterId != null">
+        COST_CENTER_ID,
+      </if>
+      <if test="costCenterCode != null">
+        COST_CENTER_CODE,
+      </if>
+      <if test="costCenter != null">
+        COST_CENTER,
+      </if>
+      <if test="financialCenterId != null">
+        FINANCIAL_CENTER_ID,
+      </if>
+      <if test="financialCenterCode != null">
+        FINANCIAL_CENTER_CODE,
+      </if>
+      <if test="financialCenter != null">
+        FINANCIAL_CENTER,
+      </if>
+      <if test="provinceSiteId != null">
+        PROVINCE_SITE_ID,
+      </if>
+      <if test="provinceSiteCode != null">
+        PROVINCE_SITE_CODE,
+      </if>
+      <if test="provinceSite != null">
+        PROVINCE_SITE,
+      </if>
+      <if test="sortCode != null">
+        SORT_CODE,
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE,
+      </if>
+      <if test="layer != null">
+        LAYER,
+      </if>
+      <if test="outerPhone != null">
+        OUTER_PHONE,
+      </if>
+      <if test="innerPhone != null">
+        INNER_PHONE,
+      </if>
+      <if test="fax != null">
+        FAX,
+      </if>
+      <if test="postalCode != null">
+        POSTAL_CODE,
+      </if>
+      <if test="web != null">
+        WEB,
+      </if>
+      <if test="isInnerOrganize != null">
+        IS_INNER_ORGANIZE,
+      </if>
+      <if test="bank != null">
+        BANK,
+      </if>
+      <if test="bankAccount != null">
+        BANK_ACCOUNT,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="bigArea != null">
+        BIG_AREA,
+      </if>
+      <if test="area != null">
+        AREA,
+      </if>
+      <if test="joiningMethods != null">
+        JOINING_METHODS,
+      </if>
+      <if test="containChildNodes != null">
+        CONTAIN_CHILD_NODES,
+      </if>
+      <if test="quickQuery != null">
+        QUICK_QUERY,
+      </if>
+      <if test="simpleSpelling != null">
+        SIMPLE_SPELLING,
+      </if>
+      <if test="provinceId != null">
+        PROVINCE_ID,
+      </if>
+      <if test="province != null">
+        PROVINCE,
+      </if>
+      <if test="cityId != null">
+        CITY_ID,
+      </if>
+      <if test="city != null">
+        CITY,
+      </if>
+      <if test="districtId != null">
+        DISTRICT_ID,
+      </if>
+      <if test="district != null">
+        DISTRICT,
+      </if>
+      <if test="streetId != null">
+        STREET_ID,
+      </if>
+      <if test="street != null">
+        STREET,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="statisticalName != null">
+        STATISTICAL_NAME,
+      </if>
+      <if test="masterId != null">
+        MASTER_ID,
+      </if>
+      <if test="master != null">
+        MASTER,
+      </if>
+      <if test="masterMobile != null">
+        MASTER_MOBILE,
+      </if>
+      <if test="masterQq != null">
+        MASTER_QQ,
+      </if>
+      <if test="emergencyCall != null">
+        EMERGENCY_CALL,
+      </if>
+      <if test="businessPhone != null">
+        BUSINESS_PHONE,
+      </if>
+      <if test="manager != null">
+        MANAGER,
+      </if>
+      <if test="managerMobile != null">
+        MANAGER_MOBILE,
+      </if>
+      <if test="managerQq != null">
+        MANAGER_QQ,
+      </if>
+      <if test="serviceManager != null">
+        SERVICE_MANAGER,
+      </if>
+      <if test="serviceManagerMobile != null">
+        SERVICE_MANAGER_MOBILE,
+      </if>
+      <if test="serviceManagerId != null">
+        SERVICE_MANAGER_ID,
+      </if>
+      <if test="complaintPhone != null">
+        COMPLAINT_PHONE,
+      </if>
+      <if test="manageId != null">
+        MANAGE_ID,
+      </if>
+      <if test="manageName != null">
+        MANAGE_NAME,
+      </if>
+      <if test="deletionStateCode != null">
+        DELETION_STATE_CODE,
+      </if>
+      <if test="enabled != null">
+        ENABLED,
+      </if>
+      <if test="createOn != null">
+        CREATE_ON,
+      </if>
+      <if test="createUserId != null">
+        CREATE_USER_ID,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="modifiedOn != null">
+        MODIFIED_ON,
+      </if>
+      <if test="modifiedUserId != null">
+        MODIFIED_USER_ID,
+      </if>
+      <if test="modifiedBy != null">
+        MODIFIED_BY,
+      </if>
+      <if test="siteTelephone != null">
+        SITE_TELEPHONE,
+      </if>
+      <if test="webEnabled != null">
+        WEB_ENABLED,
+      </if>
+      <if test="managerPhone != null">
+        MANAGER_PHONE,
+      </if>
+      <if test="serviceManagerPhone != null">
+        SERVICE_MANAGER_PHONE,
+      </if>
+      <if test="serviceManagerQq != null">
+        SERVICE_MANAGER_QQ,
+      </if>
+      <if test="masterPhone != null">
+        MASTER_PHONE,
+      </if>
+      <if test="countryId != null">
+        COUNTRY_ID,
+      </if>
+      <if test="country != null">
+        COUNTRY,
+      </if>
+      <if test="organizeFrom != null">
+        ORGANIZE_FROM,
+      </if>
+      <if test="auditStatus != null">
+        AUDIT_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null">
+        #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null">
+        #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="standardName != null">
+        #{standardName,jdbcType=VARCHAR},
+      </if>
+      <if test="standardCode != null">
+        #{standardCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentName != null">
+        #{parentName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null">
+        #{parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null">
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="costCenterId != null">
+        #{costCenterId,jdbcType=VARCHAR},
+      </if>
+      <if test="costCenterCode != null">
+        #{costCenterCode,jdbcType=VARCHAR},
+      </if>
+      <if test="costCenter != null">
+        #{costCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="financialCenterId != null">
+        #{financialCenterId,jdbcType=VARCHAR},
+      </if>
+      <if test="financialCenterCode != null">
+        #{financialCenterCode,jdbcType=VARCHAR},
+      </if>
+      <if test="financialCenter != null">
+        #{financialCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceSiteId != null">
+        #{provinceSiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceSiteCode != null">
+        #{provinceSiteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceSite != null">
+        #{provinceSite,jdbcType=VARCHAR},
+      </if>
+      <if test="sortCode != null">
+        #{sortCode,jdbcType=INTEGER},
+      </if>
+      <if test="categoryCode != null">
+        #{categoryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="layer != null">
+        #{layer,jdbcType=INTEGER},
+      </if>
+      <if test="outerPhone != null">
+        #{outerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="innerPhone != null">
+        #{innerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="postalCode != null">
+        #{postalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="web != null">
+        #{web,jdbcType=VARCHAR},
+      </if>
+      <if test="isInnerOrganize != null">
+        #{isInnerOrganize,jdbcType=INTEGER},
+      </if>
+      <if test="bank != null">
+        #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccount != null">
+        #{bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="bigArea != null">
+        #{bigArea,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="joiningMethods != null">
+        #{joiningMethods,jdbcType=VARCHAR},
+      </if>
+      <if test="containChildNodes != null">
+        #{containChildNodes,jdbcType=INTEGER},
+      </if>
+      <if test="quickQuery != null">
+        #{quickQuery,jdbcType=VARCHAR},
+      </if>
+      <if test="simpleSpelling != null">
+        #{simpleSpelling,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null">
+        #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null">
+        #{cityId,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="districtId != null">
+        #{districtId,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null">
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="streetId != null">
+        #{streetId,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null">
+        #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="statisticalName != null">
+        #{statisticalName,jdbcType=VARCHAR},
+      </if>
+      <if test="masterId != null">
+        #{masterId,jdbcType=VARCHAR},
+      </if>
+      <if test="master != null">
+        #{master,jdbcType=VARCHAR},
+      </if>
+      <if test="masterMobile != null">
+        #{masterMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="masterQq != null">
+        #{masterQq,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyCall != null">
+        #{emergencyCall,jdbcType=VARCHAR},
+      </if>
+      <if test="businessPhone != null">
+        #{businessPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="manager != null">
+        #{manager,jdbcType=VARCHAR},
+      </if>
+      <if test="managerMobile != null">
+        #{managerMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="managerQq != null">
+        #{managerQq,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceManager != null">
+        #{serviceManager,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceManagerMobile != null">
+        #{serviceManagerMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceManagerId != null">
+        #{serviceManagerId,jdbcType=VARCHAR},
+      </if>
+      <if test="complaintPhone != null">
+        #{complaintPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="manageId != null">
+        #{manageId,jdbcType=VARCHAR},
+      </if>
+      <if test="manageName != null">
+        #{manageName,jdbcType=VARCHAR},
+      </if>
+      <if test="deletionStateCode != null">
+        #{deletionStateCode,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="createOn != null">
+        #{createOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedOn != null">
+        #{modifiedOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedUserId != null">
+        #{modifiedUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedBy != null">
+        #{modifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="siteTelephone != null">
+        #{siteTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="webEnabled != null">
+        #{webEnabled,jdbcType=INTEGER},
+      </if>
+      <if test="managerPhone != null">
+        #{managerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceManagerPhone != null">
+        #{serviceManagerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceManagerQq != null">
+        #{serviceManagerQq,jdbcType=VARCHAR},
+      </if>
+      <if test="masterPhone != null">
+        #{masterPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="countryId != null">
+        #{countryId,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="organizeFrom != null">
+        #{organizeFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null">
+        #{auditStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateOrganizeSelective" parameterType="com.sto.entity.BaseOrganizeEntity">
+    update BASE_ORGANIZE
+    <set>
+      <if test="code != null">
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null">
+        SHORT_NAME = #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null">
+        FULL_NAME = #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="standardName != null">
+        STANDARD_NAME = #{standardName,jdbcType=VARCHAR},
+      </if>
+      <if test="standardCode != null">
+        STANDARD_CODE = #{standardCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentName != null">
+        PARENT_NAME = #{parentName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null">
+        PARENT_CODE = #{parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        COMPANY_ID = #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null">
+        COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="costCenterId != null">
+        COST_CENTER_ID = #{costCenterId,jdbcType=VARCHAR},
+      </if>
+      <if test="costCenterCode != null">
+        COST_CENTER_CODE = #{costCenterCode,jdbcType=VARCHAR},
+      </if>
+      <if test="costCenter != null">
+        COST_CENTER = #{costCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="financialCenterId != null">
+        FINANCIAL_CENTER_ID = #{financialCenterId,jdbcType=VARCHAR},
+      </if>
+      <if test="financialCenterCode != null">
+        FINANCIAL_CENTER_CODE = #{financialCenterCode,jdbcType=VARCHAR},
+      </if>
+      <if test="financialCenter != null">
+        FINANCIAL_CENTER = #{financialCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceSiteId != null">
+        PROVINCE_SITE_ID = #{provinceSiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceSiteCode != null">
+        PROVINCE_SITE_CODE = #{provinceSiteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceSite != null">
+        PROVINCE_SITE = #{provinceSite,jdbcType=VARCHAR},
+      </if>
+      <if test="sortCode != null">
+        SORT_CODE = #{sortCode,jdbcType=INTEGER},
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="layer != null">
+        LAYER = #{layer,jdbcType=INTEGER},
+      </if>
+      <if test="outerPhone != null">
+        OUTER_PHONE = #{outerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="innerPhone != null">
+        INNER_PHONE = #{innerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        FAX = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="postalCode != null">
+        POSTAL_CODE = #{postalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="web != null">
+        WEB = #{web,jdbcType=VARCHAR},
+      </if>
+      <if test="isInnerOrganize != null">
+        IS_INNER_ORGANIZE = #{isInnerOrganize,jdbcType=INTEGER},
+      </if>
+      <if test="bank != null">
+        BANK = #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccount != null">
+        BANK_ACCOUNT = #{bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="bigArea != null">
+        BIG_AREA = #{bigArea,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        AREA = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="joiningMethods != null">
+        JOINING_METHODS = #{joiningMethods,jdbcType=VARCHAR},
+      </if>
+      <if test="containChildNodes != null">
+        CONTAIN_CHILD_NODES = #{containChildNodes,jdbcType=INTEGER},
+      </if>
+      <if test="quickQuery != null">
+        QUICK_QUERY = #{quickQuery,jdbcType=VARCHAR},
+      </if>
+      <if test="simpleSpelling != null">
+        SIMPLE_SPELLING = #{simpleSpelling,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null">
+        PROVINCE_ID = #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        PROVINCE = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null">
+        CITY_ID = #{cityId,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="districtId != null">
+        DISTRICT_ID = #{districtId,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null">
+        DISTRICT = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="streetId != null">
+        STREET_ID = #{streetId,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null">
+        STREET = #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="statisticalName != null">
+        STATISTICAL_NAME = #{statisticalName,jdbcType=VARCHAR},
+      </if>
+      <if test="masterId != null">
+        MASTER_ID = #{masterId,jdbcType=VARCHAR},
+      </if>
+      <if test="master != null">
+        MASTER = #{master,jdbcType=VARCHAR},
+      </if>
+      <if test="masterMobile != null">
+        MASTER_MOBILE = #{masterMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="masterQq != null">
+        MASTER_QQ = #{masterQq,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyCall != null">
+        EMERGENCY_CALL = #{emergencyCall,jdbcType=VARCHAR},
+      </if>
+      <if test="businessPhone != null">
+        BUSINESS_PHONE = #{businessPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="manager != null">
+        MANAGER = #{manager,jdbcType=VARCHAR},
+      </if>
+      <if test="managerMobile != null">
+        MANAGER_MOBILE = #{managerMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="managerQq != null">
+        MANAGER_QQ = #{managerQq,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceManager != null">
+        SERVICE_MANAGER = #{serviceManager,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceManagerMobile != null">
+        SERVICE_MANAGER_MOBILE = #{serviceManagerMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceManagerId != null">
+        SERVICE_MANAGER_ID = #{serviceManagerId,jdbcType=VARCHAR},
+      </if>
+      <if test="complaintPhone != null">
+        COMPLAINT_PHONE = #{complaintPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="manageId != null">
+        MANAGE_ID = #{manageId,jdbcType=VARCHAR},
+      </if>
+      <if test="manageName != null">
+        MANAGE_NAME = #{manageName,jdbcType=VARCHAR},
+      </if>
+      <if test="deletionStateCode != null">
+        DELETION_STATE_CODE = #{deletionStateCode,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null">
+        ENABLED = #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="createOn != null">
+        CREATE_ON = #{createOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedOn != null">
+        MODIFIED_ON = #{modifiedOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedUserId != null">
+        MODIFIED_USER_ID = #{modifiedUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedBy != null">
+        MODIFIED_BY = #{modifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="siteTelephone != null">
+        SITE_TELEPHONE = #{siteTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="webEnabled != null">
+        WEB_ENABLED = #{webEnabled,jdbcType=INTEGER},
+      </if>
+      <if test="managerPhone != null">
+        MANAGER_PHONE = #{managerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceManagerPhone != null">
+        SERVICE_MANAGER_PHONE = #{serviceManagerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceManagerQq != null">
+        SERVICE_MANAGER_QQ = #{serviceManagerQq,jdbcType=VARCHAR},
+      </if>
+      <if test="masterPhone != null">
+        MASTER_PHONE = #{masterPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="countryId != null">
+        COUNTRY_ID = #{countryId,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        COUNTRY = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="organizeFrom != null">
+        ORGANIZE_FROM = #{organizeFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null">
+        AUDIT_STATUS = #{auditStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateOrganize" parameterType="com.sto.entity.BaseOrganizeEntity">
+    update BASE_ORGANIZE
+    set CODE = #{code,jdbcType=VARCHAR},
+      SHORT_NAME = #{shortName,jdbcType=VARCHAR},
+      FULL_NAME = #{fullName,jdbcType=VARCHAR},
+      STANDARD_NAME = #{standardName,jdbcType=VARCHAR},
+      STANDARD_CODE = #{standardCode,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      PARENT_NAME = #{parentName,jdbcType=VARCHAR},
+      PARENT_CODE = #{parentCode,jdbcType=VARCHAR},
+      COMPANY_ID = #{companyId,jdbcType=VARCHAR},
+      COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      COST_CENTER_ID = #{costCenterId,jdbcType=VARCHAR},
+      COST_CENTER_CODE = #{costCenterCode,jdbcType=VARCHAR},
+      COST_CENTER = #{costCenter,jdbcType=VARCHAR},
+      FINANCIAL_CENTER_ID = #{financialCenterId,jdbcType=VARCHAR},
+      FINANCIAL_CENTER_CODE = #{financialCenterCode,jdbcType=VARCHAR},
+      FINANCIAL_CENTER = #{financialCenter,jdbcType=VARCHAR},
+      PROVINCE_SITE_ID = #{provinceSiteId,jdbcType=VARCHAR},
+      PROVINCE_SITE_CODE = #{provinceSiteCode,jdbcType=VARCHAR},
+      PROVINCE_SITE = #{provinceSite,jdbcType=VARCHAR},
+      SORT_CODE = #{sortCode,jdbcType=INTEGER},
+      CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR},
+      LAYER = #{layer,jdbcType=INTEGER},
+      OUTER_PHONE = #{outerPhone,jdbcType=VARCHAR},
+      INNER_PHONE = #{innerPhone,jdbcType=VARCHAR},
+      FAX = #{fax,jdbcType=VARCHAR},
+      POSTAL_CODE = #{postalCode,jdbcType=VARCHAR},
+      WEB = #{web,jdbcType=VARCHAR},
+      IS_INNER_ORGANIZE = #{isInnerOrganize,jdbcType=INTEGER},
+      BANK = #{bank,jdbcType=VARCHAR},
+      BANK_ACCOUNT = #{bankAccount,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      BIG_AREA = #{bigArea,jdbcType=VARCHAR},
+      AREA = #{area,jdbcType=VARCHAR},
+      JOINING_METHODS = #{joiningMethods,jdbcType=VARCHAR},
+      CONTAIN_CHILD_NODES = #{containChildNodes,jdbcType=INTEGER},
+      QUICK_QUERY = #{quickQuery,jdbcType=VARCHAR},
+      SIMPLE_SPELLING = #{simpleSpelling,jdbcType=VARCHAR},
+      PROVINCE_ID = #{provinceId,jdbcType=VARCHAR},
+      PROVINCE = #{province,jdbcType=VARCHAR},
+      CITY_ID = #{cityId,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      DISTRICT_ID = #{districtId,jdbcType=VARCHAR},
+      DISTRICT = #{district,jdbcType=VARCHAR},
+      STREET_ID = #{streetId,jdbcType=VARCHAR},
+      STREET = #{street,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      STATISTICAL_NAME = #{statisticalName,jdbcType=VARCHAR},
+      MASTER_ID = #{masterId,jdbcType=VARCHAR},
+      MASTER = #{master,jdbcType=VARCHAR},
+      MASTER_MOBILE = #{masterMobile,jdbcType=VARCHAR},
+      MASTER_QQ = #{masterQq,jdbcType=VARCHAR},
+      EMERGENCY_CALL = #{emergencyCall,jdbcType=VARCHAR},
+      BUSINESS_PHONE = #{businessPhone,jdbcType=VARCHAR},
+      MANAGER = #{manager,jdbcType=VARCHAR},
+      MANAGER_MOBILE = #{managerMobile,jdbcType=VARCHAR},
+      MANAGER_QQ = #{managerQq,jdbcType=VARCHAR},
+      SERVICE_MANAGER = #{serviceManager,jdbcType=VARCHAR},
+      SERVICE_MANAGER_MOBILE = #{serviceManagerMobile,jdbcType=VARCHAR},
+      SERVICE_MANAGER_ID = #{serviceManagerId,jdbcType=VARCHAR},
+      COMPLAINT_PHONE = #{complaintPhone,jdbcType=VARCHAR},
+      MANAGE_ID = #{manageId,jdbcType=VARCHAR},
+      MANAGE_NAME = #{manageName,jdbcType=VARCHAR},
+      DELETION_STATE_CODE = #{deletionStateCode,jdbcType=INTEGER},
+      ENABLED = #{enabled,jdbcType=INTEGER},
+      CREATE_ON = #{createOn,jdbcType=TIMESTAMP},
+      CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      MODIFIED_ON = #{modifiedOn,jdbcType=TIMESTAMP},
+      MODIFIED_USER_ID = #{modifiedUserId,jdbcType=VARCHAR},
+      MODIFIED_BY = #{modifiedBy,jdbcType=VARCHAR},
+      SITE_TELEPHONE = #{siteTelephone,jdbcType=VARCHAR},
+      WEB_ENABLED = #{webEnabled,jdbcType=INTEGER},
+      MANAGER_PHONE = #{managerPhone,jdbcType=VARCHAR},
+      SERVICE_MANAGER_PHONE = #{serviceManagerPhone,jdbcType=VARCHAR},
+      SERVICE_MANAGER_QQ = #{serviceManagerQq,jdbcType=VARCHAR},
+      MASTER_PHONE = #{masterPhone,jdbcType=VARCHAR},
+      COUNTRY_ID = #{countryId,jdbcType=VARCHAR},
+      COUNTRY = #{country,jdbcType=VARCHAR},
+      ORGANIZE_FROM = #{organizeFrom,jdbcType=VARCHAR},
+      AUDIT_STATUS = #{auditStatus,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
 </mapper>

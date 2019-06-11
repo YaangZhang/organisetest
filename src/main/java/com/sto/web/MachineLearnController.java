@@ -36,7 +36,7 @@ public class MachineLearnController {
 
 //        省市都对不上的垃圾数据根本没必要学习，反而会让数据更脏一些，差距太远去了，除非特殊的情况下的。
         BaseOrganizeEntity entity = areaManager.getObjectByCodeByCache(organizeCode);
-        if (entity == null || !entity.Province.equals(provinceName) || !entity.City.equals(cityName)) {
+        if (entity == null || !entity.getProvince().equals(provinceName) || !entity.getCity().equals(cityName)) {
             return result;
         }
 

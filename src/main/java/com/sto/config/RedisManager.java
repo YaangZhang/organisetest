@@ -44,7 +44,7 @@ public class RedisManager {
     }
 
     /**
-     * 获取缓存列表
+     * 获取缓存列表 elastic
      * @param key
      * @param <T>
      * @return
