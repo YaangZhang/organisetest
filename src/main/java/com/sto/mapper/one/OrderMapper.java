@@ -13,7 +13,6 @@ package com.sto.mapper.one;/**
  */
 
 import com.sto.entity.Order;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -30,7 +29,7 @@ public interface OrderMapper {
 
     int deleteByPrimaryKey(String id);
 
-    int insert(Order record);
+//    int insert(Order record);
 
     int insertSelective(Order record);
 

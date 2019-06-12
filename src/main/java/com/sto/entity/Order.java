@@ -2,7 +2,7 @@ package com.sto.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Order implements Serializable{
     private String id;
@@ -33,13 +33,13 @@ public class Order implements Serializable{
 
     private String orderSourceCode;
 
-    private Date orderDate;
+    private Timestamp orderDate;
 
-    private Date assignDate;
+    private Timestamp assignDate;
 
-    private Date recDate;
+    private Timestamp recDate;
 
-    private Date cancelDate;
+    private Timestamp cancelDate;
 
     private String sendName;
 
@@ -147,7 +147,7 @@ public class Order implements Serializable{
 
     private Short blRetuBillSign;
 
-    private Date signDate;
+    private Timestamp signDate;
 
     private Short blSign;
 
@@ -171,7 +171,7 @@ public class Order implements Serializable{
 
     private Short deletionStateCode;
 
-    private Date createOn;
+    private Timestamp createOn;
 
     private String createUserId;
 
@@ -179,7 +179,7 @@ public class Order implements Serializable{
 
     private String createIp;
 
-    private Date modifiedOn;
+    private Timestamp modifiedOn;
 
     private String modifiedUserId;
 
@@ -187,11 +187,11 @@ public class Order implements Serializable{
 
     private String modifiedIp;
 
-    private Date syncTime;
+    private Timestamp syncTime;
 
-    private Date fetchStartDate;
+    private Timestamp fetchStartDate;
 
-    private Date fetchEndDate;
+    private Timestamp fetchEndDate;
 
     private String goodsName;
 
@@ -265,13 +265,13 @@ public class Order implements Serializable{
 
     private String payStatus;
 
-    private Date takeOrderDate;
+    private Timestamp takeOrderDate;
 
     private String takeOrderStatus;
 
-    private Date pickupGoodsDate;
+    private Timestamp pickupGoodsDate;
 
-    private Date bindBillCodeDate;
+    private Timestamp bindBillCodeDate;
 
     private String sendCompanyName;
 
@@ -403,35 +403,35 @@ public class Order implements Serializable{
         this.orderSourceCode = orderSourceCode == null ? null : orderSourceCode.trim();
     }
 
-    public Date getOrderDate() {
+    public Timestamp getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(Timestamp orderDate) {
         this.orderDate = orderDate;
     }
 
-    public Date getAssignDate() {
+    public Timestamp getAssignDate() {
         return assignDate;
     }
 
-    public void setAssignDate(Date assignDate) {
+    public void setAssignDate(Timestamp assignDate) {
         this.assignDate = assignDate;
     }
 
-    public Date getRecDate() {
+    public Timestamp getRecDate() {
         return recDate;
     }
 
-    public void setRecDate(Date recDate) {
+    public void setRecDate(Timestamp recDate) {
         this.recDate = recDate;
     }
 
-    public Date getCancelDate() {
+    public Timestamp getCancelDate() {
         return cancelDate;
     }
 
-    public void setCancelDate(Date cancelDate) {
+    public void setCancelDate(Timestamp cancelDate) {
         this.cancelDate = cancelDate;
     }
 
@@ -859,11 +859,11 @@ public class Order implements Serializable{
         this.blRetuBillSign = blRetuBillSign;
     }
 
-    public Date getSignDate() {
+    public Timestamp getSignDate() {
         return signDate;
     }
 
-    public void setSignDate(Date signDate) {
+    public void setSignDate(Timestamp signDate) {
         this.signDate = signDate;
     }
 
@@ -955,11 +955,11 @@ public class Order implements Serializable{
         this.deletionStateCode = deletionStateCode;
     }
 
-    public Date getCreateOn() {
+    public Timestamp getCreateOn() {
         return createOn;
     }
 
-    public void setCreateOn(Date createOn) {
+    public void setCreateOn(Timestamp createOn) {
         this.createOn = createOn;
     }
 
@@ -987,11 +987,11 @@ public class Order implements Serializable{
         this.createIp = createIp == null ? null : createIp.trim();
     }
 
-    public Date getModifiedOn() {
+    public Timestamp getModifiedOn() {
         return modifiedOn;
     }
 
-    public void setModifiedOn(Date modifiedOn) {
+    public void setModifiedOn(Timestamp modifiedOn) {
         this.modifiedOn = modifiedOn;
     }
 
@@ -1019,27 +1019,27 @@ public class Order implements Serializable{
         this.modifiedIp = modifiedIp == null ? null : modifiedIp.trim();
     }
 
-    public Date getSyncTime() {
+    public Timestamp getSyncTime() {
         return syncTime;
     }
 
-    public void setSyncTime(Date syncTime) {
+    public void setSyncTime(Timestamp syncTime) {
         this.syncTime = syncTime;
     }
 
-    public Date getFetchStartDate() {
+    public Timestamp getFetchStartDate() {
         return fetchStartDate;
     }
 
-    public void setFetchStartDate(Date fetchStartDate) {
+    public void setFetchStartDate(Timestamp fetchStartDate) {
         this.fetchStartDate = fetchStartDate;
     }
 
-    public Date getFetchEndDate() {
+    public Timestamp getFetchEndDate() {
         return fetchEndDate;
     }
 
-    public void setFetchEndDate(Date fetchEndDate) {
+    public void setFetchEndDate(Timestamp fetchEndDate) {
         this.fetchEndDate = fetchEndDate;
     }
 
@@ -1331,11 +1331,11 @@ public class Order implements Serializable{
         this.payStatus = payStatus == null ? null : payStatus.trim();
     }
 
-    public Date getTakeOrderDate() {
+    public Timestamp getTakeOrderDate() {
         return takeOrderDate;
     }
 
-    public void setTakeOrderDate(Date takeOrderDate) {
+    public void setTakeOrderDate(Timestamp takeOrderDate) {
         this.takeOrderDate = takeOrderDate;
     }
 
@@ -1347,19 +1347,19 @@ public class Order implements Serializable{
         this.takeOrderStatus = takeOrderStatus == null ? null : takeOrderStatus.trim();
     }
 
-    public Date getPickupGoodsDate() {
+    public Timestamp getPickupGoodsDate() {
         return pickupGoodsDate;
     }
 
-    public void setPickupGoodsDate(Date pickupGoodsDate) {
+    public void setPickupGoodsDate(Timestamp pickupGoodsDate) {
         this.pickupGoodsDate = pickupGoodsDate;
     }
 
-    public Date getBindBillCodeDate() {
+    public Timestamp getBindBillCodeDate() {
         return bindBillCodeDate;
     }
 
-    public void setBindBillCodeDate(Date bindBillCodeDate) {
+    public void setBindBillCodeDate(Timestamp bindBillCodeDate) {
         this.bindBillCodeDate = bindBillCodeDate;
     }
 

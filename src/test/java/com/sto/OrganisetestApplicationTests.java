@@ -56,8 +56,8 @@ public class OrganisetestApplicationTests {
 		organizeEntities.forEach(baseOrganizeEntity -> {
 			System.out.println(baseOrganizeEntity);
 			areaMapper.insertOrganize(baseOrganizeEntity);
-			System.out.println("organizeEntities.size()  = "+organizeEntities.size());
 		});
+		System.out.println("organizeEntities.size()  = "+organizeEntities.size());
 	}
 
 	@Test
@@ -134,24 +134,28 @@ public class OrganisetestApplicationTests {
 	@Test
 	public void contextLoads() {
 		Order order = orderCallMapper.getOrderByOrderId("ST194115034693");
-		System.out.println("order = "+order);
-//		int insert = orderMapper.insertSelective(order);
-//		System.out.println("insert ="+ insert +"order ="+ order);
+//		System.out.println("order = "+order);
+		int insert = orderMapper.insertSelective(order);
+		System.out.println("insert ="+ insert +", order ="+ order);
 	}
 
 	@Test
 	public void getlistByDate() {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		map.put("beginTime",sdf.format(new Date(System.currentTimeMillis() - 2000000000)) );
-		map.put("endTime",sdf.format(new Date()));
+//		map.put("beginTime",sdf.format(new Date(System.currentTimeMillis() - 200000000)) );
+//		map.put("endTime",sdf.format(new Date()));
+		map.put("beginTime","2019-06-06 00:00:00");
+		map.put("endTime","2019-06-11 00:00:00");
+		map.put("sendProv","辽宁省");
+
 		System.out.println("map = "+map);
-		List<Order> orders = orderCallMapper.getListByDate(map);
+		List<Order> orders = orderCallMapper.getListByProv(map);
 		orders.forEach(order -> {
 			orderMapper.insertSelective(order);
 			System.out.println("getlistByDate ="+ order);
 		});
-
+		System.out.println("orders.size() ="+ orders.size());
 	}
 
 	@Test

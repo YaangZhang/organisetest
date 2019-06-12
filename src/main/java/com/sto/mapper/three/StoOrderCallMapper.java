@@ -4,15 +4,13 @@ import com.sto.entity.Order;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public interface StoOrderCallMapper {
 
 
     int deleteByPrimaryKey(String id);
 
-    int insert(Order record);
-
+//    int insert(Order record);
     int insertSelective(Order record);
 
     Order selectByPrimaryKey(String id);
@@ -27,7 +25,11 @@ public interface StoOrderCallMapper {
 
     List<Order> getListByCity(HashMap map);
 
+    List<Order> getListByProv(HashMap map);
+
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+
+
 }

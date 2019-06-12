@@ -16,10 +16,10 @@
     <result column="ASSIGN_SITE_NAME" property="assignSiteName" jdbcType="VARCHAR" />
     <result column="ORDER_SOURCE" property="orderSource" jdbcType="VARCHAR" />
     <result column="ORDER_SOURCE_CODE" property="orderSourceCode" jdbcType="VARCHAR" />
-    <result column="ORDER_DATE" property="orderDate" jdbcType="DATE" />
-    <result column="ASSIGN_DATE" property="assignDate" jdbcType="DATE" />
-    <result column="REC_DATE" property="recDate" jdbcType="DATE" />
-    <result column="CANCEL_DATE" property="cancelDate" jdbcType="DATE" />
+    <result column="ORDER_DATE" property="orderDate" jdbcType="TIMESTAMP" />
+    <result column="ASSIGN_DATE" property="assignDate" jdbcType="TIMESTAMP" />
+    <result column="REC_DATE" property="recDate" jdbcType="TIMESTAMP" />
+    <result column="CANCEL_DATE" property="cancelDate" jdbcType="TIMESTAMP" />
     <result column="SEND_NAME" property="sendName" jdbcType="VARCHAR" />
     <result column="SEND_PHONE" property="sendPhone" jdbcType="VARCHAR" />
     <result column="SEND_POSTCODE" property="sendPostcode" jdbcType="VARCHAR" />
@@ -73,7 +73,7 @@
     <result column="BL_STORE_PRICE" property="blStorePrice" jdbcType="DECIMAL" />
     <result column="BL_RETURN_BILL" property="blReturnBill" jdbcType="DECIMAL" />
     <result column="BL_RETU_BILL_SIGN" property="blRetuBillSign" jdbcType="DECIMAL" />
-    <result column="SIGN_DATE" property="signDate" jdbcType="DATE" />
+    <result column="SIGN_DATE" property="signDate" jdbcType="TIMESTAMP" />
     <result column="BL_SIGN" property="blSign" jdbcType="DECIMAL" />
     <result column="DISP_MAN" property="dispMan" jdbcType="VARCHAR" />
     <result column="DISP_MAN_CODE" property="dispManCode" jdbcType="VARCHAR" />
@@ -85,17 +85,17 @@
     <result column="RECEIVE_SMS_TEMPLATE" property="receiveSmsTemplate" jdbcType="VARCHAR" />
     <result column="REMARK" property="remark" jdbcType="VARCHAR" />
     <result column="DELETION_STATE_CODE" property="deletionStateCode" jdbcType="DECIMAL" />
-    <result column="CREATE_ON" property="createOn" jdbcType="DATE" />
+    <result column="CREATE_ON" property="createOn" jdbcType="TIMESTAMP" />
     <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR" />
     <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
     <result column="CREATE_IP" property="createIp" jdbcType="VARCHAR" />
-    <result column="MODIFIED_ON" property="modifiedOn" jdbcType="DATE" />
+    <result column="MODIFIED_ON" property="modifiedOn" jdbcType="TIMESTAMP" />
     <result column="MODIFIED_USER_ID" property="modifiedUserId" jdbcType="VARCHAR" />
     <result column="MODIFIED_BY" property="modifiedBy" jdbcType="VARCHAR" />
     <result column="MODIFIED_IP" property="modifiedIp" jdbcType="VARCHAR" />
-    <result column="SYNC_TIME" property="syncTime" jdbcType="DATE" />
-    <result column="FETCH_START_DATE" property="fetchStartDate" jdbcType="DATE" />
-    <result column="FETCH_END_DATE" property="fetchEndDate" jdbcType="DATE" />
+    <result column="SYNC_TIME" property="syncTime" jdbcType="TIMESTAMP" />
+    <result column="FETCH_START_DATE" property="fetchStartDate" jdbcType="TIMESTAMP" />
+    <result column="FETCH_END_DATE" property="fetchEndDate" jdbcType="TIMESTAMP" />
     <result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR" />
     <result column="PRODUCT_TYPE" property="productType" jdbcType="VARCHAR" />
     <result column="BAIDU_LATITUDE" property="baiduLatitude" jdbcType="VARCHAR" />
@@ -132,10 +132,10 @@
     <result column="PICKUP_IMAGE_ID" property="pickupImageId" jdbcType="VARCHAR" />
     <result column="GOODS_IMAGE_ID" property="goodsImageId" jdbcType="VARCHAR" />
     <result column="PAY_STATUS" property="payStatus" jdbcType="VARCHAR" />
-    <result column="TAKE_ORDER_DATE" property="takeOrderDate" jdbcType="DATE" />
+    <result column="TAKE_ORDER_DATE" property="takeOrderDate" jdbcType="TIMESTAMP" />
     <result column="TAKE_ORDER_STATUS" property="takeOrderStatus" jdbcType="VARCHAR" />
-    <result column="PICKUP_GOODS_DATE" property="pickupGoodsDate" jdbcType="DATE" />
-    <result column="BIND_BILL_CODE_DATE" property="bindBillCodeDate" jdbcType="DATE" />
+    <result column="PICKUP_GOODS_DATE" property="pickupGoodsDate" jdbcType="TIMESTAMP" />
+    <result column="BIND_BILL_CODE_DATE" property="bindBillCodeDate" jdbcType="TIMESTAMP" />
     <result column="SEND_COMPANY_NAME" property="sendCompanyName" jdbcType="VARCHAR" />
     <result column="REC_COMPANY_NAME" property="recCompanyName" jdbcType="VARCHAR" />
     <result column="SEND_USER_ADDRESS_ID" property="sendUserAddressId" jdbcType="VARCHAR" />
@@ -248,6 +248,20 @@
     from STO_ORDER_CALL
     <where>
       SEND_CITY = #{sendCity,jdbcType=VARCHAR}
+      <if test="beginTime != null and beginTime != ''">
+        AND ORDER_DATE <![CDATA[>=]]> to_date(#{beginTime},'yyyy-MM-dd HH24:mi:ss')
+      </if>
+      <if test="endTime != null and endTime != ''">
+        AND ORDER_DATE <![CDATA[<]]>to_date(#{endTime},'yyyy-MM-dd HH24:mi:ss')
+      </if>
+    </where>
+  </select>
+<select id="getListByProv" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select
+    <include refid="Base_Column_List" />
+    from STO_ORDER_CALL
+    <where>
+      SEND_PROV = #{sendProv,jdbcType=VARCHAR}
       <if test="beginTime != null and beginTime != ''">
         AND ORDER_DATE <![CDATA[>=]]> to_date(#{beginTime},'yyyy-MM-dd HH24:mi:ss')
       </if>
@@ -1129,12 +1143,12 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.sto.entity.Order" resultType="java.lang.Integer" >
+ <!-- <select id="countByExample" parameterType="com.sto.entity.Order" resultType="java.lang.Integer" >
     select count(*) from STO_ORDER_CALL
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-  </select>
+  </select>-->
 
   <update id="updateByPrimaryKeySelective" parameterType="com.sto.entity.Order" >
     update STO_ORDER_CALL

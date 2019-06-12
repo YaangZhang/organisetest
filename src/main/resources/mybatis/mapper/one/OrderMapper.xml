@@ -16,7 +16,7 @@
     <result column="ASSIGN_SITE_NAME" property="assignSiteName" jdbcType="VARCHAR" />
     <result column="ORDER_SOURCE" property="orderSource" jdbcType="VARCHAR" />
     <result column="ORDER_SOURCE_CODE" property="orderSourceCode" jdbcType="VARCHAR" />
-    <result column="ORDER_DATE" property="orderDate" jdbcType="DATE" />
+    <result column="ORDER_DATE" property="orderDate" jdbcType="TIMESTAMP" />
     <result column="ASSIGN_DATE" property="assignDate" jdbcType="DATE" />
     <result column="REC_DATE" property="recDate" jdbcType="DATE" />
     <result column="CANCEL_DATE" property="cancelDate" jdbcType="DATE" />
@@ -714,16 +714,16 @@
         #{orderSourceCode,jdbcType=VARCHAR},
       </if>
       <if test="orderDate != null" >
-        #{orderDate,jdbcType=DATE},
+        #{orderDate,jdbcType=TIMESTAMP},
       </if>
       <if test="assignDate != null" >
-        #{assignDate,jdbcType=DATE},
+        #{assignDate,jdbcType=TIMESTAMP},
       </if>
       <if test="recDate != null" >
-        #{recDate,jdbcType=DATE},
+        #{recDate,jdbcType=TIMESTAMP},
       </if>
       <if test="cancelDate != null" >
-        #{cancelDate,jdbcType=DATE},
+        #{cancelDate,jdbcType=TIMESTAMP},
       </if>
       <if test="sendName != null" >
         #{sendName,jdbcType=VARCHAR},
@@ -885,7 +885,7 @@
         #{blRetuBillSign,jdbcType=DECIMAL},
       </if>
       <if test="signDate != null" >
-        #{signDate,jdbcType=DATE},
+        #{signDate,jdbcType=TIMESTAMP},
       </if>
       <if test="blSign != null" >
         #{blSign,jdbcType=DECIMAL},
@@ -921,7 +921,7 @@
         #{deletionStateCode,jdbcType=DECIMAL},
       </if>
       <if test="createOn != null" >
-        #{createOn,jdbcType=DATE},
+        #{createOn,jdbcType=TIMESTAMP},
       </if>
       <if test="createUserId != null" >
         #{createUserId,jdbcType=VARCHAR},
@@ -933,7 +933,7 @@
         #{createIp,jdbcType=VARCHAR},
       </if>
       <if test="modifiedOn != null" >
-        #{modifiedOn,jdbcType=DATE},
+        #{modifiedOn,jdbcType=TIMESTAMP},
       </if>
       <if test="modifiedUserId != null" >
         #{modifiedUserId,jdbcType=VARCHAR},
@@ -945,13 +945,13 @@
         #{modifiedIp,jdbcType=VARCHAR},
       </if>
       <if test="syncTime != null" >
-        #{syncTime,jdbcType=DATE},
+        #{syncTime,jdbcType=TIMESTAMP},
       </if>
       <if test="fetchStartDate != null" >
-        #{fetchStartDate,jdbcType=DATE},
+        #{fetchStartDate,jdbcType=TIMESTAMP},
       </if>
       <if test="fetchEndDate != null" >
-        #{fetchEndDate,jdbcType=DATE},
+        #{fetchEndDate,jdbcType=TIMESTAMP},
       </if>
       <if test="goodsName != null" >
         #{goodsName,jdbcType=VARCHAR},
@@ -1062,16 +1062,16 @@
         #{payStatus,jdbcType=VARCHAR},
       </if>
       <if test="takeOrderDate != null" >
-        #{takeOrderDate,jdbcType=DATE},
+        #{takeOrderDate,jdbcType=TIMESTAMP},
       </if>
       <if test="takeOrderStatus != null" >
         #{takeOrderStatus,jdbcType=VARCHAR},
       </if>
       <if test="pickupGoodsDate != null" >
-        #{pickupGoodsDate,jdbcType=DATE},
+        #{pickupGoodsDate,jdbcType=TIMESTAMP},
       </if>
       <if test="bindBillCodeDate != null" >
-        #{bindBillCodeDate,jdbcType=DATE},
+        #{bindBillCodeDate,jdbcType=TIMESTAMP},
       </if>
       <if test="sendCompanyName != null" >
         #{sendCompanyName,jdbcType=VARCHAR},
@@ -1102,12 +1102,12 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.sto.entity.Order" resultType="java.lang.Integer" >
+ <!-- <select id="countByExample" parameterType="com.sto.entity.Order" resultType="java.lang.Integer" >
     select count(*) from sto_order_call
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-  </select>
+  </select>-->
 
   <update id="updateByPrimaryKeySelective" parameterType="com.sto.entity.Order" >
     update base_order_call
