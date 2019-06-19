@@ -6,16 +6,17 @@ import com.sto.mapper.one.BaseOrganizeArea1Mapper;
 import com.sto.mapper.one.OrderMapper;
 import com.sto.mapper.three.StoOrderCallMapper;
 import com.sto.mapper.two.BaseOrganizeArea2Mapper;
+import com.sto.mapper.two.User2Mapper;
 import com.sto.param.AreaParam;
 import com.sto.result.Page;
 import com.sto.service.BaseOrganizeAreaManager;
+import com.sto.service.DataService;
 import com.sto.service.RedisService;
 import com.sto.util.AddressResolutionUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.ParseException;
@@ -40,6 +41,108 @@ public class OrganisetestApplicationTests {
 	private RedisManager redisManager;
 	@Autowired
 	private BaseOrganizeAreaManager areaManager;
+	@Autowired
+	private User2Mapper user2Mapper;
+	@Autowired
+	private DataService dataService;
+
+	@Test
+	public void testuser(){
+		String sql = "insert into BASE_USER (ID, CODE, USER_NAME, \n" +
+				"      REAL_NAME, NICKNAME, QUICK_QUERY, \n" +
+				"      SIMPLE_SPELLING, DUTY, TITLE, \n" +
+				"      GENDER, SIGNATURE, IDCARD, \n" +
+				"      BIRTHDAY, COMPANY_ID, COMPANY_CODE, \n" +
+				"      COMPANY_NAME, DEPARTMENT_ID, DEPARTMENT_CODE, \n" +
+				"      DEPARTMENT_NAME, SUB_COMPANY_ID, SUB_COMPANY_NAME, \n" +
+				"      SUB_DEPARTMENT_ID, SUB_DEPARTMENT_NAME, WORKGROUP_ID, \n" +
+				"      WORKGROUP_NAME, PROVINCE_ID, PROVINCE, \n" +
+				"      CITY_ID, CITY, DISTRICT_ID, \n" +
+				"      DISTRICT, HOME_ADDRESS, DESCRIPTION, \n" +
+				"      IS_ADMINISTRATOR, WORK_CATEGORY, SECURITY_LEVEL, \n" +
+				"      LANG, THEME, SCORE, \n" +
+				"      FANS, USER_FROM, MANAGER_ID, \n" +
+				"      MANAGER_AUDIT_STATUS, MANAGER_AUDIT_DATE, \n" +
+				"      SORT_CODE, IS_STAFF, IS_VISIBLE, \n" +
+				"      ENABLED, DELETION_STATE_CODE, AUDIT_STATUS, \n" +
+				"      CREATE_ON, CREATE_USER_ID, CREATE_BY, \n" +
+				"      MODIFIED_ON, MODIFIED_USER_ID, MODIFIED_BY, \n" +
+				"      MANAGER, COUNTRY_ID, COUNTRY\n" +
+				"      )\n" +
+				"    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+//		List<BaseUserExpressEntity> entities = user2Mapper.getByCompanyId("4dd721ec");
+		List<BaseUserExpressEntity> entities = user2Mapper.getByProv("上海");
+		int size = entities.size();
+		entities.forEach(baseUserExpressEntity -> {
+			System.out.println(baseUserExpressEntity);
+		});
+		System.out.println("==================="+entities.size());
+	}
+
+	private Object[] getMulParams(List<BaseUser> userList, int mulSize) {
+		Object[] params = new Object[mulSize * 56];
+		for (int i = 0; i < mulSize; i++) {
+			BaseUser userInfo = userList.get(i);
+			params[56 * i] = userInfo.getId();
+			params[56 * i + 1] = userInfo.getCode();
+			params[56 * i + 2] = userInfo.getUserName();
+			params[56 * i + 3] = userInfo.getRealName();
+			params[56 * i + 4] = userInfo.getNickname();
+			params[56 * i + 5] = userInfo.getQuickQuery();
+			params[56 * i + 6] = userInfo.getSimpleSpelling();
+			params[56 * i + 7] = userInfo.getDuty();
+			params[56 * i + 8] = userInfo.getTitle();
+			params[56 * i + 9] = userInfo.getGender();
+			params[56 * i + 10] = userInfo.getSignature();
+			params[56 * i + 11] = userInfo.getIdcard();
+			params[56 * i + 12] = userInfo.getBirthday();
+			params[56 * i + 13] = userInfo.getCompanyId();
+			params[56 * i + 14] = userInfo.getCompanyCode();
+			params[56 * i + 15] = userInfo.getCompanyName();
+			params[56 * i + 16] = userInfo.getDepartmentId();
+			params[56 * i + 17] = userInfo.getDepartmentCode();
+			params[56 * i + 18] = userInfo.getDepartmentName();
+			params[56 * i + 19] = userInfo.getSubCompanyId();
+			params[56 * i + 20] = userInfo.getSubCompanyName();
+			params[56 * i + 21] = userInfo.getSubDepartmentId();
+			params[56 * i + 22] = userInfo.getSubDepartmentName();
+			params[56 * i + 23] = userInfo.getWorkgroupId();
+			params[56 * i + 24] = userInfo.getWorkgroupName();
+			params[56 * i + 25] = userInfo.getProvinceId();
+			params[56 * i + 26] = userInfo.getProvince();
+			params[56 * i + 27] = userInfo.getCityId();
+			params[56 * i + 28] = userInfo.getCity();
+			params[56 * i + 29] = userInfo.getDistrictId();
+			params[56 * i + 30] = userInfo.getDistrict();
+			params[56 * i + 31] = userInfo.getHomeAddress();
+			params[56 * i + 32] = userInfo.getDescription();
+			params[56 * i + 33] = userInfo.getIsAdministrator();
+			params[56 * i + 34] = userInfo.getWorkCategory();
+			params[56 * i + 35] = userInfo.getSecurityLevel();
+			params[56 * i + 36] = userInfo.getLang();
+			params[56 * i + 37] = userInfo.getTheme();
+			params[56 * i + 38] = userInfo.getScore();
+			params[56 * i + 39] = userInfo.getFans();
+			params[56 * i + 40] = userInfo.getUserFrom();
+			params[56 * i + 41] = userInfo.getManagerId();
+			params[56 * i + 42] = userInfo.getManagerAuditStatus();
+			params[56 * i + 43] = userInfo.getManagerAuditDate();
+			params[56 * i + 44] = userInfo.getSortCode();
+			params[56 * i + 45] = userInfo.getIsStaff();
+			params[56 * i + 46] = userInfo.getIsVisible();
+			params[56 * i + 47] = userInfo.getEnabled();
+			params[56 * i + 48] = userInfo.getDeletionStateCode();
+			params[56 * i + 49] = userInfo.getAuditStatus();
+			params[56 * i + 50] = userInfo.getCreateOn();
+			params[56 * i + 51] = userInfo.getCreateUserId();
+			params[56 * i + 52] = userInfo.getCreateBy();
+			params[56 * i + 53] = userInfo.getModifiedOn();
+			params[56 * i + 54] = userInfo.getModifiedUserId();
+			params[56 * i + 55] = userInfo.getModifiedBy();
+			params[56 * i + 56] = userInfo.getManager();
+		}
+		return params;
+	}
 
 	@Test
 	public void testRedis(){

@@ -41,7 +41,6 @@ public class OrderController {
 
     @Autowired
     private StoOrderCallMapper orderCallMapper;
-
     @Autowired
     private OrderMapper orderMapper;
     @Autowired
