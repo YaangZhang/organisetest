@@ -1,6 +1,7 @@
 package com.sto.mapper.one;
 
 import com.sto.entity.BaseUser;
+import com.sto.entity.EmployeeScope;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -68,6 +69,9 @@ public interface UserMapper {
              @Result(column = "create_user_id", property = "createUserId"),
      })
     public List<BaseUser> getByCompanyId(String companyId);
+
+    @Select("SELECT u.id id, u.real_name realName, u.nickname nickName, u.code code FROM BASE_USER u WHERE COMPANY_ID = #{companyId}")
+    public List<EmployeeScope> getEmployeeByCompanyId(String companyId);
 
     @Select("SELECT * FROM BASE_USER WHERE PROVINCE = #{province}")
     @Results({
