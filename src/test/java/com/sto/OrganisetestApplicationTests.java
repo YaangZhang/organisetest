@@ -4,6 +4,7 @@ import com.sto.config.RedisManager;
 import com.sto.entity.*;
 import com.sto.mapper.one.BaseOrganizeArea1Mapper;
 import com.sto.mapper.one.OrderMapper;
+import com.sto.mapper.one.UserExpressMapper;
 import com.sto.mapper.three.StoOrderCallMapper;
 import com.sto.mapper.two.BaseOrganizeArea2Mapper;
 import com.sto.mapper.two.User2Mapper;
@@ -17,11 +18,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.stream.Stream;
 
 @RunWith(SpringRunner.class)
@@ -44,8 +48,27 @@ public class OrganisetestApplicationTests {
 	@Autowired
 	private User2Mapper user2Mapper;
 	@Autowired
+	private UserExpressMapper userExpressMapper;
+	@Autowired
 	private DataService dataService;
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 
+	@Test
+	public void userExpressTest(){
+		List<BaseUserExpressEntity> expressEntities = userExpressMapper.getByCompanyId("1e8e921a");
+		List<String> ids = new ArrayList<>();
+		expressEntities.forEach(baseUserExpressEntity -> {
+			System.out.println(baseUserExpressEntity);
+			ids.add(baseUserExpressEntity.getId());
+		});
+		System.out.println(ids);
+		System.out.println("……………………………………………………………………………………………………………………");
+		List<BaseUserExpressEntity> listById = userExpressMapper.getListById(ids, null);
+		listById.forEach(baseUserExpressEntity -> {
+			System.out.println("listById :"+baseUserExpressEntity);
+		});
+	}
 	@Test
 	public void testuser(){
 		String sql = "insert into BASE_USER (ID, CODE, USER_NAME, \n" +
@@ -66,22 +89,52 @@ public class OrganisetestApplicationTests {
 				"      SORT_CODE, IS_STAFF, IS_VISIBLE, \n" +
 				"      ENABLED, DELETION_STATE_CODE, AUDIT_STATUS, \n" +
 				"      CREATE_ON, CREATE_USER_ID, CREATE_BY, \n" +
-				"      MODIFIED_ON, MODIFIED_USER_ID, MODIFIED_BY, \n" +
-				"      MANAGER, COUNTRY_ID, COUNTRY\n" +
+				"      MODIFIED_ON, MODIFIED_USER_ID, MODIFIED_BY \n" +
 				"      )\n" +
-				"    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-//		List<BaseUserExpressEntity> entities = user2Mapper.getByCompanyId("4dd721ec");
-		List<BaseUserExpressEntity> entities = user2Mapper.getByProv("上海");
+				"    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		long l = System.currentTimeMillis();
+		List<BaseUser> entities = user2Mapper.getUserAll();
+//		List<BaseUser> entities = user2Mapper.getByProv("上海");
 		int size = entities.size();
-		entities.forEach(baseUserExpressEntity -> {
-			System.out.println(baseUserExpressEntity);
-		});
-		System.out.println("==================="+entities.size());
+		System.out.println("size == "+size);
+//		entities.forEach(baseUserExpressEntity -> {
+//			System.out.println(baseUserExpressEntity);
+//		});
+		long beginTime = System.currentTimeMillis();
+		System.out.println("查询 "+size+" 条， 共用时 "+(beginTime - l) +" ms !   ===================");
+		System.out.println(new Date());
+		try {
+			String insertSqlStr = genMulFixSqlStr(sql, 200);
+			BlockingQueue<BaseUser> userQueue = initUserQueue(entities);
+			List<BaseUser> userList = new ArrayList<>();
+			while (!userQueue.isEmpty()) {
+				BaseUser user = userQueue.take();
+				userList.add(user);
+				if (userList.size() == 200) {
+					Object[] params = getMulParams(userList);
+					jdbcTemplate.update(insertSqlStr, params);
+					userList.clear();
+				}
+			}
+			//插入剩余的数据
+			if (!userList.isEmpty()) {
+				String restInsertSql = genMulFixSqlStr(sql, userList.size());
+				Object[] params = getMulParams(userList);
+				jdbcTemplate.update(restInsertSql, params);
+				userList.clear();
+			}
+			long endTime = System.currentTimeMillis();
+			long time = endTime - beginTime;
+			System.out.println(size + " 条记录插入，耗时 " + time+" ms ,   速度 ："+(size / time * 1000)+" 条/s");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 	}
 
-	private Object[] getMulParams(List<BaseUser> userList, int mulSize) {
-		Object[] params = new Object[mulSize * 56];
-		for (int i = 0; i < mulSize; i++) {
+	private Object[] getMulParams(List<BaseUser> userList) {
+		Object[] params = new Object[userList.size() * 56];
+		for (int i = 0; i < userList.size(); i++) {
 			BaseUser userInfo = userList.get(i);
 			params[56 * i] = userInfo.getId();
 			params[56 * i + 1] = userInfo.getCode();
@@ -139,9 +192,26 @@ public class OrganisetestApplicationTests {
 			params[56 * i + 53] = userInfo.getModifiedOn();
 			params[56 * i + 54] = userInfo.getModifiedUserId();
 			params[56 * i + 55] = userInfo.getModifiedBy();
-			params[56 * i + 56] = userInfo.getManager();
+//			params[56 * i + 56] = userInfo.getManager();
 		}
 		return params;
+	}
+
+	public BlockingQueue<BaseUser> initUserQueue(List<BaseUser> entities) {
+		BlockingQueue<BaseUser> userQueue = new LinkedBlockingQueue<>();
+		for (BaseUser user : entities) {
+			userQueue.add(user);
+		}
+		return userQueue;
+	}
+
+	private String genMulFixSqlStr(String sql, int mulSize) {
+		StringBuffer mulInserSql = new StringBuffer();
+		mulInserSql.append(sql);
+		for (int i = 1; i < mulSize; i++) {
+			mulInserSql.append(",(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		}
+		return mulInserSql.toString();
 	}
 
 	@Test

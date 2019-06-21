@@ -1,4 +1,4 @@
-package com.sto.entity;
+package com.sto.order.entity;
 
 import java.util.Date;
 
@@ -1201,68 +1201,5 @@ public class BaseUser {
      */
     public void setManager(String manager) {
         this.manager = manager;
-    }
-
-    @Override
-    public String toString() {
-        return "BaseUser{" +
-                "id='" + id + '\'' +
-                ", code='" + code + '\'' +
-                ", userName='" + userName + '\'' +
-                ", realName='" + realName + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", quickQuery='" + quickQuery + '\'' +
-                ", simpleSpelling='" + simpleSpelling + '\'' +
-                ", duty='" + duty + '\'' +
-                ", title='" + title + '\'' +
-                ", gender='" + gender + '\'' +
-                ", signature='" + signature + '\'' +
-                ", idcard='" + idcard + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", companyId='" + companyId + '\'' +
-                ", companyCode='" + companyCode + '\'' +
-                ", companyName='" + companyName + '\'' +
-                ", departmentId='" + departmentId + '\'' +
-                ", departmentCode='" + departmentCode + '\'' +
-                ", departmentName='" + departmentName + '\'' +
-                ", subCompanyId='" + subCompanyId + '\'' +
-                ", subCompanyName='" + subCompanyName + '\'' +
-                ", subDepartmentId='" + subDepartmentId + '\'' +
-                ", subDepartmentName='" + subDepartmentName + '\'' +
-                ", workgroupId='" + workgroupId + '\'' +
-                ", workgroupName='" + workgroupName + '\'' +
-                ", provinceId=" + provinceId +
-                ", province='" + province + '\'' +
-                ", cityId=" + cityId +
-                ", city='" + city + '\'' +
-                ", districtId=" + districtId +
-                ", district='" + district + '\'' +
-                ", homeAddress='" + homeAddress + '\'' +
-                ", description='" + description + '\'' +
-                ", isAdministrator=" + isAdministrator +
-                ", workCategory='" + workCategory + '\'' +
-                ", securityLevel=" + securityLevel +
-                ", lang='" + lang + '\'' +
-                ", theme='" + theme + '\'' +
-                ", score=" + score +
-                ", fans=" + fans +
-                ", userFrom='" + userFrom + '\'' +
-                ", managerId='" + managerId + '\'' +
-                ", managerAuditStatus='" + managerAuditStatus + '\'' +
-                ", managerAuditDate=" + managerAuditDate +
-                ", sortCode=" + sortCode +
-                ", isStaff=" + isStaff +
-                ", isVisible=" + isVisible +
-                ", enabled=" + enabled +
-                ", deletionStateCode=" + deletionStateCode +
-                ", auditStatus='" + auditStatus + '\'' +
-                ", createOn=" + createOn +
-                ", createUserId='" + createUserId + '\'' +
-                ", createBy='" + createBy + '\'' +
-                ", modifiedOn=" + modifiedOn +
-                ", modifiedUserId='" + modifiedUserId + '\'' +
-                ", modifiedBy='" + modifiedBy + '\'' +
-                ", manager='" + manager + '\'' +
-                '}';
     }
 }
