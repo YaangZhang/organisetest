@@ -56,18 +56,25 @@ public class OrganisetestApplicationTests {
 
 	@Test
 	public void userExpressTest(){
-		List<BaseUserExpressEntity> expressEntities = userExpressMapper.getByCompanyId("1e8e921a");
+		List<EmployeeScope> expressEntities = userExpressMapper.getUserByCompanyId("1e8e921a", "");
 		List<String> ids = new ArrayList<>();
-		expressEntities.forEach(baseUserExpressEntity -> {
-			System.out.println(baseUserExpressEntity);
-			ids.add(baseUserExpressEntity.getId());
+		expressEntities.forEach(employeeScope -> {
+			System.out.println(employeeScope);
+			ids.add(employeeScope.getId());
 		});
+
+		ids.add("05f158df27df4b2b89c66f9dc3ec1e75");
+		ids.add("032dc78aece841398e1de9bd5ca2986a");
+		ids.add("3cf3c0d494b6419e9d82ad9f19e2cc84");
+		ids.add("0e05900d75db4c8cbea4430a32c0ef27");
 		System.out.println(ids);
-		System.out.println("……………………………………………………………………………………………………………………");
-		List<BaseUserExpressEntity> listById = userExpressMapper.getListById(ids, null);
+		System.out.println(expressEntities.size()+" ==……………………………………………………………………………………………………………………");
+//		System.out.println(" ==……………………………………………………………………………………………………………………");
+		List<BaseUserExpressEntity> listById = userExpressMapper.getListById(ids, "财政局");
 		listById.forEach(baseUserExpressEntity -> {
 			System.out.println("listById :"+baseUserExpressEntity);
 		});
+		System.out.println(listById.size());
 	}
 	@Test
 	public void testuser(){
